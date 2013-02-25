@@ -12,7 +12,7 @@ float4 PSMain(float2 pos: TEXCOORD, float4 SVP : SV_POSITION) : SV_TARGET {
 	float3 color = InputTexture.Sample(Sampler, pos).rgb;
 
 	if(pos.x > 0.3 && pos.x < 0.7 && pos.y > 0.3 && pos.y < 0.7)
-		return float4(color * 1.01,1);
+		return float4(color * 1.1,1);
 	
 	return float4(color,1);
 

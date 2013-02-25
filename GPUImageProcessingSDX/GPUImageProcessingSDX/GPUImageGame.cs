@@ -37,17 +37,17 @@ namespace GPUImageProcessingSDX
             
             RenderImage = Content.Load<Effect>("RenderToScreen.fxo");
             Texture2D InTex = Content.Load<Texture2D>("bigWalt.dds");
-
-            RenderTarget2D rt = RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm);
-
             Effect blur = Content.Load<Effect>("Blur.fxo");
 
+            RenderTarget2D rt = RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm);
             RenderTarget2D rt2 = RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm);
 
             InitialFilter = new ImageFilter(RenderImage, rt, new Parameter("InputTexture",InTex));
             InitialFilter.NextFilter = new ImageFilter(blur, rt2, new Parameter("InputTexture", InitialFilter.RenderTarget));
 
             TerminalFilter = InitialFilter.NextFilter;
+
+            TerminalFilter.NextFilter = null;
 
             base.LoadContent();
         }
@@ -60,7 +60,7 @@ namespace GPUImageProcessingSDX
         {
             ImageFilter curFilter = InitialFilter;
 
-            while (curFilter != TerminalFilter)
+            while (curFilter != null)
             {
 
                 curFilter.UpdateParameters();
@@ -82,7 +82,7 @@ namespace GPUImageProcessingSDX
 
             ImageFilter curFilter = InitialFilter;
 
-            while (curFilter != TerminalFilter)
+            while (curFilter != null)
             {
 
                 GraphicsDevice.SetRenderTargets(curFilter.RenderTarget);

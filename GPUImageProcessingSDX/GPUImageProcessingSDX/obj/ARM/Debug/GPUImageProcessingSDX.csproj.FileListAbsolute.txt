@@ -36,3 +36,40 @@ c:\users\paul\documents\visual studio 2012\Projects\GPUImageProcessingSDX\GPUIma
 c:\users\paul\documents\visual studio 2012\Projects\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\GPUImageProcessingSDX_Debug_ARM.xap
 c:\users\paul\documents\visual studio 2012\Projects\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\XapCacheFile.xml
 C:\Users\paul\documents\visual studio 2012\Projects\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\GPUImageProcessingSDX.csprojResolveAssemblyReference.cache
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\Assets\ApplicationIcon.png
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\Assets\Tiles\FlipCycleTileLarge.png
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\Assets\Tiles\FlipCycleTileMedium.png
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\Assets\Tiles\FlipCycleTileSmall.png
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\Assets\Tiles\IconicTileMediumLarge.png
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\Assets\Tiles\IconicTileSmall.png
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\GPUImageProcessingSDX.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\GPUImageProcessingSDX.pdb
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\AppManifest.xaml
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\GPUImageProcessingSDX_Debug_ARM.xap
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Direct3D11.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.DXGI.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.MediaFoundation.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Toolkit.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Toolkit.Game.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Toolkit.Graphics.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.WP8.winmd
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.pdb
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Direct3D11.pdb
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.DXGI.pdb
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.MediaFoundation.pdb
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Toolkit.pdb
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Toolkit.Game.pdb
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Toolkit.Graphics.pdb
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Toolkit.Input.pdb
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.WP8.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.WP8.pdb
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\GPUImageProcessingSDX.csprojResolveAssemblyReference.cache
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\App.g.cs
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\MainPage.g.cs
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\GPUImageProcessingSDX.g.resources
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\GPUImageProcessingSDX.Resources.AppResources.resources
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\GPUImageProcessingSDX.csproj.GenerateResource.Cache
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\GPUImageProcessingSDX.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\GPUImageProcessingSDX.pdb
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\XapCacheFile.xml

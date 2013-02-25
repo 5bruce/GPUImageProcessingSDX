@@ -77,9 +77,6 @@ namespace GPUImageProcessingSDX
                     {
                         RenderEffect.Parameters[param.Name].SetResource(param.Value);
                     }
-
-                    param.HasChanged = false;
-
                 }
             }
         }
