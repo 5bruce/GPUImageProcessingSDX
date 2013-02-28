@@ -12,7 +12,7 @@ namespace GPUImageProcessingSDX
         private Effect m_Effect;
         private RenderTarget2D m_RenderTarget;
         private ImageFilter m_NextFilter;
-        List<Parameter> Parameters;
+        public List<Parameter> Parameters;
 
         public Effect RenderEffect
         {
@@ -43,10 +43,33 @@ namespace GPUImageProcessingSDX
             {
                 Parameters.Add(p);
             }
-
         }
 
-        public virtual void UpdateParameters()
+        /// <summary>
+        /// update a parameter value
+        /// </summary>
+        /// <param name="name">The parameter to update</param>
+        /// <param name="value">The value to change to</param>
+        /// <returns>true if the parameter is found, and updated sucessfully.</returns>
+        public bool UpdateParameter(string name, object value)
+        {
+            bool success = false;
+
+            foreach (Parameter p in Parameters)
+            {
+                if (p.Name == name)
+                {
+                    p.Value = value;
+                    success = true;
+                    p.HasChanged = true;
+                    break;
+                }
+            }
+
+            return success;
+        }
+
+        public virtual void SendParametersToGPU()
         {
             foreach (Parameter param in Parameters)
             {

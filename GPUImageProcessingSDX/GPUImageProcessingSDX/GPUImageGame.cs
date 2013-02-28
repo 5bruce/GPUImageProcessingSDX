@@ -63,7 +63,7 @@ namespace GPUImageProcessingSDX
             while (curFilter != null)
             {
 
-                curFilter.UpdateParameters();
+                curFilter.SendParametersToGPU();
 
                 curFilter = curFilter.NextFilter;
 
