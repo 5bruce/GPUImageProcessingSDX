@@ -46,7 +46,7 @@ namespace GPUImageProcessingSDX {
                 return;
             }
             _contentLoaded = true;
-            System.Windows.Application.LoadComponent(this, new System.Uri("/GPUImageProcessingSDX;component/App.xaml", System.UriKind.Relative));
+            System.Windows.Application.LoadComponent(this, new System.Uri("/.in;component/App.xaml", System.UriKind.Relative));
         }
     }
 }

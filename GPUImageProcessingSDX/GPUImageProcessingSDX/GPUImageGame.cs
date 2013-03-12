@@ -16,6 +16,7 @@ namespace GPUImageProcessingSDX
         Effect RenderImage;
 
         ImageFilter InitialFilter;
+        ImageFilter BrightSquare;
         ImageFilter TerminalFilter;
 
         /// <summary>
@@ -42,10 +43,13 @@ namespace GPUImageProcessingSDX
             RenderTarget2D rt = RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm);
             RenderTarget2D rt2 = RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm);
 
-            InitialFilter = new ImageFilter(RenderImage, rt, new Parameter("InputTexture",InTex));
-            InitialFilter.NextFilter = new ImageFilter(blur, rt2, new Parameter("InputTexture", InitialFilter.RenderTarget));
+            InitialFilter = new ImageFilter(RenderImage, rt);
+            InitialFilter.AddInput(InTex);
 
-            TerminalFilter = InitialFilter.NextFilter;
+            InitialFilter.NextFilter = BrightSquare = new ImageFilter(blur, rt2);
+            BrightSquare.AddInput(InitialFilter.RenderTarget);
+
+            TerminalFilter = BrightSquare;
 
             TerminalFilter.NextFilter = null;
 
@@ -62,12 +66,10 @@ namespace GPUImageProcessingSDX
 
             while (curFilter != null)
             {
-
                 curFilter.SendParametersToGPU();
-
                 curFilter = curFilter.NextFilter;
-
             }
+
             base.Update(gameTime);
         }
 
@@ -84,12 +86,10 @@ namespace GPUImageProcessingSDX
 
             while (curFilter != null)
             {
-
                 GraphicsDevice.SetRenderTargets(curFilter.RenderTarget);
                 GraphicsDevice.DrawQuad(curFilter.RenderEffect);
 
                 curFilter = curFilter.NextFilter;
-
             }
 
             GraphicsDevice.SetRenderTargets(GraphicsDevice.BackBuffer);

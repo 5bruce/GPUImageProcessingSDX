@@ -13,6 +13,7 @@ namespace GPUImageProcessingSDX
         private RenderTarget2D m_RenderTarget;
         private ImageFilter m_NextFilter;
         public List<Parameter> Parameters;
+        public Dictionary<object, int> Inputs;
 
         public Effect RenderEffect
         {
@@ -34,6 +35,9 @@ namespace GPUImageProcessingSDX
 
         public ImageFilter(Effect eff, RenderTarget2D rt, params Parameter[] list)
         {
+
+            Inputs = new Dictionary<object, int>();
+
             RenderEffect = eff;
             RenderTarget = rt;
 
@@ -43,6 +47,22 @@ namespace GPUImageProcessingSDX
             {
                 Parameters.Add(p);
             }
+        }
+        
+
+        public void AddInput(ImageFilter imfil, int num = -1)
+        {
+            Inputs.Add(imfil.RenderTarget, num);
+        }
+
+        public void AddInput(RenderTarget2D rt, int num = -1)
+        {
+            Inputs.Add(rt, num);
+        }
+
+        public void AddInput(Texture2D tex, int num = -1)
+        {
+            Inputs.Add(tex, num);
         }
 
         /// <summary>
@@ -102,6 +122,17 @@ namespace GPUImageProcessingSDX
                     }
                 }
             }
+
+            foreach (KeyValuePair<object, int> kvp in Inputs)
+            {
+                if (kvp.Key is RenderTarget2D || kvp.Key is Texture2D)
+                {
+                    string s = kvp.Value.ToString();
+                    if (kvp.Value < 0) s = string.Empty;
+                    RenderEffect.Parameters["InputTexture" +s].SetResource(kvp.Key);
+                }
+            }
+
         }
 
         public override string ToString()

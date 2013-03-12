@@ -49,7 +49,7 @@ namespace GPUImageProcessingSDX {
                 return;
             }
             _contentLoaded = true;
-            System.Windows.Application.LoadComponent(this, new System.Uri("/GPUImageProcessingSDX;component/MainPage.xaml", System.UriKind.Relative));
+            System.Windows.Application.LoadComponent(this, new System.Uri("/.in;component/MainPage.xaml", System.UriKind.Relative));
             this.DisplayGrid = ((System.Windows.Controls.DrawingSurfaceBackgroundGrid)(this.FindName("DisplayGrid")));
         }
     }

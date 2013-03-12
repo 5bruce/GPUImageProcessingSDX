@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{4b03b9b7-29d0-4813-964e-b3337203b4d9}" Title="GPUImageProcessingSDX" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="GPUImageProcessingSDX author" Description="Sample description" Publisher="GPUImageProcessingSDX" PublisherID="{25954e45-ef1d-40bc-a091-b55dc3386495}">
+  <App xmlns="" ProductID="{4b03b9b7-29d0-4813-964e-b3337203b4d8}" Title="GPUImageProcessingSDX" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="GPUImageProcessingSDX author" Description="Sample description" Publisher="GPUImageProcessingSDX" PublisherID="{25954e45-ef1d-40bc-a091-b55dc3386495}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
