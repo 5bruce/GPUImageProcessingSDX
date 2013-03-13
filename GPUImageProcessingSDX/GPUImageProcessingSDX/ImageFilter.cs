@@ -35,7 +35,6 @@ namespace GPUImageProcessingSDX
 
         public ImageFilter(Effect eff, RenderTarget2D rt, params Parameter[] list)
         {
-
             Inputs = new Dictionary<object, int>();
 
             RenderEffect = eff;
@@ -49,7 +48,6 @@ namespace GPUImageProcessingSDX
             }
         }
         
-
         public void AddInput(ImageFilter imfil, int num = -1)
         {
             Inputs.Add(imfil.RenderTarget, num);

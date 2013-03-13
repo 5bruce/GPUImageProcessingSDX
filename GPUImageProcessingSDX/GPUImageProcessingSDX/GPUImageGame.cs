@@ -17,6 +17,7 @@ namespace GPUImageProcessingSDX
 
         ImageFilter InitialFilter;
         ImageFilter BrightSquare;
+        ImageFilter f,g;
         ImageFilter TerminalFilter;
 
         /// <summary>
@@ -35,21 +36,24 @@ namespace GPUImageProcessingSDX
         /// </summary>
         protected override void LoadContent()
         {
-            
-            RenderImage = Content.Load<Effect>("RenderToScreen.fxo");
+
             Texture2D InTex = Content.Load<Texture2D>("bigWalt.dds");
+
+            RenderImage = Content.Load<Effect>("RenderToScreen.fxo");
+
             Effect blur = Content.Load<Effect>("Blur.fxo");
+            Effect blur2 = Content.Load<Effect>("BLUR2.fxo");
 
-            RenderTarget2D rt = RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm);
-            RenderTarget2D rt2 = RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm);
-
-            InitialFilter = new ImageFilter(RenderImage, rt);
+            InitialFilter = new ImageFilter(RenderImage, RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm));
             InitialFilter.AddInput(InTex);
 
-            InitialFilter.NextFilter = BrightSquare = new ImageFilter(blur, rt2);
+            InitialFilter.NextFilter = BrightSquare = new ImageFilter(blur, RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm));
             BrightSquare.AddInput(InitialFilter.RenderTarget);
 
-            TerminalFilter = BrightSquare;
+            BrightSquare.NextFilter = f = new ImageFilter(blur2, RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm));
+            f.AddInput(BrightSquare.RenderTarget);
+
+            TerminalFilter = f;
 
             TerminalFilter.NextFilter = null;
 
