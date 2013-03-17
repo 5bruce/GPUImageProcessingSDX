@@ -124,6 +124,26 @@
     <Content Include="Content\Blur.fx" />
     <Content Include="Content\RenderToScreen.fxo" />
     <Content Include="Content\BLUR2.fxo" />
+    <Content Include="Content\HLSL\COMBINE.fxo" />
+    <Content Include="Content\HLSL\deleteme.fxo" />
+    <Content Include="Content\HLSL\GPUImageContrastFilter.fxo" />
+    <Content Include="Content\HLSL\GPUImageMultiplyBlendFilter.fxo" />
+    <Content Include="Content\HLSL\RenderToScreen.fxo" />
+    <Content Include="Content\HLSL\ToonFXAutoGammaCorrectFilter.fxo" />
+    <Content Include="Content\HLSL\ToonFXCMY64AutoConstrastColorFilter.fxo" />
+    <Content Include="Content\HLSL\ToonFXCMY64ColorFilter.fxo" />
+    <Content Include="Content\HLSL\ToonFXFlowBilateralCurveFilter.fxo" />
+    <Content Include="Content\HLSL\ToonFXFlowBilateralLineFilter.fxo" />
+    <Content Include="Content\HLSL\ToonFXFlowDogFilter.fxo" />
+    <Content Include="Content\HLSL\ToonFXFlowFromStructureTensor.fxo" />
+    <Content Include="Content\HLSL\ToonFXGaussianFilter.fxo" />
+    <Content Include="Content\HLSL\ToonFXLineIntegralConvolutionFilter.fxo" />
+    <Content Include="Content\HLSL\ToonFXPrepareForDogFilter.fxo" />
+    <Content Include="Content\HLSL\ToonFXQuantizeColorsUsingFlowFilter.fxo" />
+    <Content Include="Content\HLSL\ToonFXRotateTxColorSpaceFilter.fxo" />
+    <Content Include="Content\HLSL\ToonFXStructureTensorUsingSobelFilter.fxo" />
+    <Content Include="Content\HLSL\ToonFXThresholdDogFilter.fxo" />
+    <Content Include="Content\HLSL\ToonFXToonSegmentation.fxo" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>

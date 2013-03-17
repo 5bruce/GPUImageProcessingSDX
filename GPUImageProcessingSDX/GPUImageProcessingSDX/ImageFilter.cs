@@ -111,7 +111,7 @@ namespace GPUImageProcessingSDX
                         catch (Exception e)
                         {
                             System.Diagnostics.Debug.WriteLine("Could not convert the parameter type to the corresponding type in the effect.\n " +
-                                "Make sure your types in the Effect and in the Parameter are the same!");
+                                "Make sure your types in the Effect and in the Parameter are the same! ......." + param.Name + "....." + this.RenderEffect.Name);
                         }
                     }
                     else
@@ -128,6 +128,7 @@ namespace GPUImageProcessingSDX
                     string s = kvp.Value.ToString();
                     if (kvp.Value < 0) s = string.Empty;
                     RenderEffect.Parameters["InputTexture" +s].SetResource(kvp.Key);
+                    
                 }
             }
 

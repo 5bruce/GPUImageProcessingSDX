@@ -16,8 +16,6 @@ namespace GPUImageProcessingSDX
         Effect RenderImage;
 
         ImageFilter InitialFilter;
-        ImageFilter BrightSquare;
-        ImageFilter f,g;
         ImageFilter TerminalFilter;
 
         /// <summary>
@@ -30,6 +28,11 @@ namespace GPUImageProcessingSDX
             Content.RootDirectory = "Content";
         }
 
+        private RenderTarget2D CreateRT()
+        {
+            return RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm);
+        }
+
         /// <summary>
         /// This is called once the GraphicsDevice is all loaded up. 
         /// Load any effects, textures, etc
@@ -38,22 +41,56 @@ namespace GPUImageProcessingSDX
         {
 
             Texture2D InTex = Content.Load<Texture2D>("bigWalt.dds");
+            RenderImage = Content.Load<Effect>(@"HLSL\RenderToScreen.fxo");
 
-            RenderImage = Content.Load<Effect>("RenderToScreen.fxo");
+            ImageFilter structureTensor = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXStructureTensorUsingSobelFilter.fxo"), CreateRT());
 
-            Effect blur = Content.Load<Effect>("Blur.fxo");
-            Effect blur2 = Content.Load<Effect>("BLUR2.fxo");
+            ImageFilter tensorSmoothing = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXGaussianFilter.fxo"), CreateRT(),new Parameter("texelWidthOffset",0.0012f),
+                new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_flow", 2.66f));
 
-            InitialFilter = new ImageFilter(RenderImage, RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm));
+            ImageFilter flow = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXFlowFromStructureTensor.fxo"), CreateRT());
+
+            ImageFilter prepareForDOG = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXPrepareForDogFilter.fxo"), CreateRT());
+
+            ImageFilter DOG = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXFlowDogFilter.fxo"), CreateRT(), new Parameter("texelWidthOffset", 0.0012f),
+                new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_dog", 0.9f + 0.9f * 1.0f));
+
+            ImageFilter Threshold = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXThresholdDogFilter.fxo"), CreateRT(), new Parameter("edge_offset", 0.17f),
+                new Parameter("grey_offset", 2.5f), new Parameter("black_offset", 2.65f));
+
+            ImageFilter LIC = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXLineIntegralConvolutionFilter.fxo"), CreateRT(), new Parameter("texelWidthOffset", 0.0012f),
+                new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_c", 4.97f));
+
+            ImageFilter toScreen = new ImageFilter(RenderImage, CreateRT());
+
+            structureTensor.AddInput(toScreen);
+            prepareForDOG.AddInput(toScreen);
+
+            tensorSmoothing.AddInput(structureTensor);
+            flow.AddInput(tensorSmoothing);
+
+            DOG.AddInput(prepareForDOG,1);
+            DOG.AddInput(flow,2);
+
+            LIC.AddInput(DOG,1);
+            LIC.AddInput(flow,2);
+
+            Threshold.AddInput(LIC);
+
+
+
+            InitialFilter = toScreen;
             InitialFilter.AddInput(InTex);
 
-            InitialFilter.NextFilter = BrightSquare = new ImageFilter(blur, RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm));
-            BrightSquare.AddInput(InitialFilter.RenderTarget);
+            toScreen.NextFilter = structureTensor;
+            structureTensor.NextFilter = tensorSmoothing;
+            tensorSmoothing.NextFilter = flow;
+            flow.NextFilter = prepareForDOG;
+            prepareForDOG.NextFilter = DOG;
+            DOG.NextFilter = LIC;
+            LIC.NextFilter = Threshold;
 
-            BrightSquare.NextFilter = f = new ImageFilter(blur2, RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm));
-            f.AddInput(BrightSquare.RenderTarget);
-
-            TerminalFilter = f;
+            TerminalFilter = Threshold;
 
             TerminalFilter.NextFilter = null;
 
@@ -70,6 +107,7 @@ namespace GPUImageProcessingSDX
 
             while (curFilter != null)
             {
+
                 curFilter.SendParametersToGPU();
                 curFilter = curFilter.NextFilter;
             }
