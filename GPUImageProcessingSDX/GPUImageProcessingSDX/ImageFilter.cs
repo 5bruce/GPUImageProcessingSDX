@@ -1,4 +1,5 @@
-﻿using SharpDX.Toolkit.Graphics;
+﻿using SharpDX;
+using SharpDX.Toolkit.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -95,12 +96,26 @@ namespace GPUImageProcessingSDX
                 {
                     if (RenderEffect.Parameters[param.Name].IsValueType)
                     {
-                        EffectParameterType type = RenderEffect.Parameters[param.Name].ParameterType;
+                        EffectParameter p = RenderEffect.Parameters[param.Name];
+                        EffectParameterType type = p.ParameterType;
+                        
+                        
                         try
                         {
                             switch (type)
                             {
-                                case EffectParameterType.Float: RenderEffect.Parameters[param.Name].SetValue((float)param.Value); break;
+                                case EffectParameterType.Float:
+                                    if (p.ColumnCount == 2)
+                                    {
+
+                                        RenderEffect.Parameters[param.Name].SetValue((Vector2)param.Value);
+                                    }
+                                    else
+                                    {
+                                        RenderEffect.Parameters[param.Name].SetValue((float)param.Value);
+
+                                    }
+                                        break;
                                 case EffectParameterType.Double: RenderEffect.Parameters[param.Name].SetValue((double)param.Value); break;
                                 case EffectParameterType.Int: RenderEffect.Parameters[param.Name].SetValue((int)param.Value); break;
                                 case EffectParameterType.Bool: RenderEffect.Parameters[param.Name].SetValue((bool)param.Value); break;

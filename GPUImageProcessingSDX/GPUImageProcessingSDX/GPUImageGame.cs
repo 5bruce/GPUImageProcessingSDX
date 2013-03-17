@@ -33,6 +33,9 @@ namespace GPUImageProcessingSDX
             return RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm);
         }
 
+
+        ImageFilter structureTensor, tensorSmoothing, flow, prepareForDOG, DOG, Threshold, LIC, toScreen;
+
         /// <summary>
         /// This is called once the GraphicsDevice is all loaded up. 
         /// Load any effects, textures, etc
@@ -43,25 +46,25 @@ namespace GPUImageProcessingSDX
             Texture2D InTex = Content.Load<Texture2D>("bigWalt.dds");
             RenderImage = Content.Load<Effect>(@"HLSL\RenderToScreen.fxo");
 
-            ImageFilter structureTensor = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXStructureTensorUsingSobelFilter.fxo"), CreateRT());
+             structureTensor = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXStructureTensorUsingSobelFilter.fxo"), CreateRT(), new Parameter("ImageSize", new Vector2(GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height)));
 
-            ImageFilter tensorSmoothing = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXGaussianFilter.fxo"), CreateRT(),new Parameter("texelWidthOffset",0.0012f),
+             tensorSmoothing = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXGaussianFilter.fxo"), CreateRT(),new Parameter("texelWidthOffset",0.0012f),
                 new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_flow", 2.66f));
 
-            ImageFilter flow = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXFlowFromStructureTensor.fxo"), CreateRT());
+             flow = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXFlowFromStructureTensor.fxo"), CreateRT());
 
-            ImageFilter prepareForDOG = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXPrepareForDogFilter.fxo"), CreateRT());
+             prepareForDOG = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXPrepareForDogFilter.fxo"), CreateRT());
 
-            ImageFilter DOG = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXFlowDogFilter.fxo"), CreateRT(), new Parameter("texelWidthOffset", 0.0012f),
+             DOG = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXFlowDogFilter.fxo"), CreateRT(), new Parameter("texelWidthOffset", 0.0012f),
                 new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_dog", 0.9f + 0.9f * 1.0f));
 
-            ImageFilter Threshold = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXThresholdDogFilter.fxo"), CreateRT(), new Parameter("edge_offset", 0.17f),
+             Threshold = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXThresholdDogFilter.fxo"), CreateRT(), new Parameter("edge_offset", 0.17f),
                 new Parameter("grey_offset", 2.5f), new Parameter("black_offset", 2.65f));
 
-            ImageFilter LIC = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXLineIntegralConvolutionFilter.fxo"), CreateRT(), new Parameter("texelWidthOffset", 0.0012f),
+             LIC = new ImageFilter(Content.Load<Effect>(@"HLSL\ToonFXLineIntegralConvolutionFilter.fxo"), CreateRT(), new Parameter("texelWidthOffset", 0.0012f),
                 new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_c", 4.97f));
 
-            ImageFilter toScreen = new ImageFilter(RenderImage, CreateRT());
+             toScreen = new ImageFilter(RenderImage, CreateRT());
 
             structureTensor.AddInput(toScreen);
             prepareForDOG.AddInput(toScreen);
