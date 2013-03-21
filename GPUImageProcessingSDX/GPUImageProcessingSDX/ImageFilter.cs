@@ -12,9 +12,12 @@ namespace GPUImageProcessingSDX
     {
         private Effect m_Effect;
         private RenderTarget2D m_RenderTarget;
-        private ImageFilter m_NextFilter;
+        public List<ImageFilter> Children;
+        public List<ImageFilter> Parents;
         public List<Parameter> Parameters;
         public Dictionary<object, int> Inputs;
+        public bool NeedRender = true;
+        public string Path = string.Empty;
 
         public Effect RenderEffect
         {
@@ -28,30 +31,28 @@ namespace GPUImageProcessingSDX
             set { m_RenderTarget = value; }
         }
 
-        public ImageFilter NextFilter
+        public ImageFilter(string p, params Parameter[] list)
         {
-            get { return m_NextFilter; }
-            set { m_NextFilter = value; }
-        }
 
-        public ImageFilter(Effect eff, RenderTarget2D rt, params Parameter[] list)
-        {
+            Children = new List<ImageFilter>();
+            Parents = new List<ImageFilter>();
             Inputs = new Dictionary<object, int>();
 
-            RenderEffect = eff;
-            RenderTarget = rt;
+            Path = p;
 
             Parameters = new List<Parameter>();
 
-            foreach (Parameter p in list)
+            foreach (Parameter par in list)
             {
-                Parameters.Add(p);
+                Parameters.Add(par);
             }
         }
         
         public void AddInput(ImageFilter imfil, int num = -1)
         {
-            Inputs.Add(imfil.RenderTarget, num);
+            Parents.Add(imfil);
+            imfil.Children.Add(this);
+            Inputs.Add(imfil, num);
         }
 
         public void AddInput(RenderTarget2D rt, int num = -1)
@@ -142,8 +143,14 @@ namespace GPUImageProcessingSDX
                 {
                     string s = kvp.Value.ToString();
                     if (kvp.Value < 0) s = string.Empty;
-                    RenderEffect.Parameters["InputTexture" +s].SetResource(kvp.Key);
-                    
+                    RenderEffect.Parameters["InputTexture" + s].SetResource(kvp.Key);
+
+                }
+                else if (kvp.Key is ImageFilter)
+                {
+                    string s = kvp.Value.ToString();
+                    if (kvp.Value < 0) s = string.Empty;
+                    RenderEffect.Parameters["InputTexture" + s].SetResource(((ImageFilter)kvp.Key).RenderTarget);
                 }
             }
 
