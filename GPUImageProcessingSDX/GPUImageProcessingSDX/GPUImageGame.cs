@@ -20,7 +20,7 @@ namespace GPUImageProcessingSDX
         public List<ImageFilter> Filters;
 
         public static List<ImageFilter> InitialFilters;
-
+        public static bool NeedsRender = true;
 
         /// <summary>
         /// basic constructor. Just setting things up - pretty standard
@@ -119,23 +119,28 @@ namespace GPUImageProcessingSDX
             //reset the color of the screen...not really important since we are using effects
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            foreach (ImageFilter i in InitialFilters)
+            if (NeedsRender)
             {
-                GraphicsDevice.SetRenderTargets(i.RenderTarget);
-                GraphicsDevice.DrawQuad(i.RenderEffect);
-
-                i.NeedRender = false;
-
-                foreach (ImageFilter c in i.Children)
+                foreach (ImageFilter i in InitialFilters)
                 {
-                    DrawRec(c);
-                }
-            }
+                    GraphicsDevice.SetRenderTargets(i.RenderTarget);
+                    GraphicsDevice.DrawQuad(i.RenderEffect);
 
-            //TODO need to add the "NeedsRender" bool...cant be rendering everything every time draw is called!!
-            foreach (ImageFilter i in InitialFilters)
-            {
-                ChangeNeedsRender(i);
+                    i.NeedRender = false;
+
+                    foreach (ImageFilter c in i.Children)
+                    {
+                        DrawRec(c);
+                    }
+                }
+
+                //TODO need to add the "NeedsRender" bool...cant be rendering everything every time draw is called!!
+                foreach (ImageFilter i in InitialFilters)
+                {
+                    ChangeNeedsRender(i);
+                }
+
+                NeedsRender = false;
             }
 
             GraphicsDevice.SetRenderTargets(GraphicsDevice.BackBuffer);

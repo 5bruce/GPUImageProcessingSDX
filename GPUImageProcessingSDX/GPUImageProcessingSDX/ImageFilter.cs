@@ -82,6 +82,7 @@ namespace GPUImageProcessingSDX
                     p.Value = value;
                     success = true;
                     p.HasChanged = true;
+                    GPUImageGame.NeedsRender = true;
                     break;
                 }
             }

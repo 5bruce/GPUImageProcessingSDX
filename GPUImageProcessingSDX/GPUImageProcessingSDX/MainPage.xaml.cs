@@ -8,6 +8,7 @@ using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using GPUImageProcessingSDX.Resources;
+using System.Threading;
 
 namespace GPUImageProcessingSDX
 {
@@ -39,6 +40,7 @@ namespace GPUImageProcessingSDX
     {
 
         GPUImageGame Renderer;
+        ImageFilter structureTensor, tensorSmoothing, flow, prepareForDOG, DOG, Threshold, LIC, toScreen;
 
         // Constructor
         public MainPage()
@@ -51,7 +53,6 @@ namespace GPUImageProcessingSDX
         {
             Renderer = new GPUImageGame();
 
-            ImageFilter structureTensor, tensorSmoothing, flow, prepareForDOG, DOG, Threshold, LIC, toScreen;
 
             structureTensor = new ImageFilter(@"HLSL\ToonFXStructureTensorUsingSobelFilter.fxo", new Parameter("ImageSize", null));
 
@@ -78,7 +79,7 @@ namespace GPUImageProcessingSDX
 
             tensorSmoothing.AddInput(structureTensor);
             flow.AddInput(tensorSmoothing);
-
+            
             DOG.AddInput(prepareForDOG, 1);
             DOG.AddInput(flow, 2);
 
@@ -91,6 +92,23 @@ namespace GPUImageProcessingSDX
 
             Renderer.Run(DisplayGrid);
 
+            Thread t = new Thread(thing);
+            t.Start();
+            
+        
+        }
+
+        float edgeOffset = 0.17f;
+
+        private void thing()
+        {
+            while (true)
+            {
+                edgeOffset += 0.01f;
+                Threshold.UpdateParameter("edge_offset", edgeOffset);
+                System.Diagnostics.Debug.WriteLine(edgeOffset);
+                Thread.Sleep(100);
+            }
         }
 
 
