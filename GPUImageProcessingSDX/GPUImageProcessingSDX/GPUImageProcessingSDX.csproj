@@ -120,6 +120,8 @@
   <ItemGroup>
     <Content Include="Content\bigWalt.dds" />
     <Content Include="Content\Blur.fxo" />
+    <Content Include="ChangeOrientation.fx" />
+    <Content Include="ChangeOrientation.fxo" />
     <None Include="Content\compile.bat" />
     <Content Include="Content\Blur.fx" />
     <Content Include="Content\RenderToScreen.fxo" />

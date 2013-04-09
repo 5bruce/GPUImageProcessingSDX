@@ -53,7 +53,6 @@ namespace GPUImageProcessingSDX
         {
             Renderer = new GPUImageGame();
 
-
             structureTensor = new ImageFilter(@"HLSL\ToonFXStructureTensorUsingSobelFilter.fxo", new Parameter("ImageSize", null));
 
             tensorSmoothing = new ImageFilter(@"HLSL\ToonFXGaussianFilter.fxo", new Parameter("texelWidthOffset", 0.0012f),
@@ -93,9 +92,10 @@ namespace GPUImageProcessingSDX
             Renderer.Run(DisplayGrid);
 
             Thread t = new Thread(thing);
-            t.Start();
+            //t.Start();
             
-        
+
+
         }
 
         float edgeOffset = 0.17f;
@@ -106,7 +106,6 @@ namespace GPUImageProcessingSDX
             {
                 edgeOffset += 0.01f;
                 Threshold.UpdateParameter("edge_offset", edgeOffset);
-                System.Diagnostics.Debug.WriteLine(edgeOffset);
                 Thread.Sleep(100);
             }
         }
