@@ -9,6 +9,11 @@ using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 using GPUImageProcessingSDX.Resources;
 using System.Threading;
+using System.Windows.Threading;
+using Microsoft.Phone.Tasks;
+using Microsoft.Phone;
+using System.IO;
+using SharpDX.Toolkit.Graphics;
 
 namespace GPUImageProcessingSDX
 {
@@ -42,11 +47,38 @@ namespace GPUImageProcessingSDX
         GPUImageGame Renderer;
         ImageFilter structureTensor, tensorSmoothing, flow, prepareForDOG, DOG, Threshold, LIC, toScreen;
 
+        public static Dispatcher MyDispatcher;
+
         // Constructor
         public MainPage()
         {
             InitializeComponent();
             AddEffects();
+            MyDispatcher = this.Dispatcher;
+
+
+            AddAppBar();
+
+        }
+
+        private void AddAppBar()
+        {
+            ApplicationBar appBar = new ApplicationBar();
+
+            ApplicationBarMenuItem load = new ApplicationBarMenuItem("Load");
+            load.Click += new EventHandler(load_click);
+            load.IsEnabled = true;
+            appBar.MenuItems.Add(load);
+
+            ApplicationBarMenuItem save = new ApplicationBarMenuItem("Save");
+            save.Click += new EventHandler(save_click);
+            save.IsEnabled = true;
+            appBar.MenuItems.Add(save);
+
+            ApplicationBar = appBar;
+
+
+
         }
 
         public void AddEffects()
@@ -71,8 +103,8 @@ namespace GPUImageProcessingSDX
             LIC = new ImageFilter(@"HLSL\ToonFXLineIntegralConvolutionFilter.fxo", new Parameter("texelWidthOffset", 0.0012f),
                new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_c", 4.97f));
 
-            GPUImageGame.InitialFilters.Add(toScreen = new ImageFilter("bigWalt.dds"));
-
+            GPUImageGame.InitialFilters.Add(toScreen = new ImageFilter("nature-hd-background.dds"));
+            
             structureTensor.AddInput(toScreen);
             prepareForDOG.AddInput(toScreen);
 
@@ -90,26 +122,47 @@ namespace GPUImageProcessingSDX
             Renderer.TerminalFilter = Threshold;
 
             Renderer.Run(DisplayGrid);
-
-            Thread t = new Thread(thing);
-            //t.Start();
-            
-
-
         }
 
-        float edgeOffset = 0.17f;
-
-        private void thing()
+      
+        private void save_click(object sender, EventArgs e)
         {
-            while (true)
-            {
-                edgeOffset += 0.01f;
-                Threshold.UpdateParameter("edge_offset", edgeOffset);
-                Thread.Sleep(100);
-            }
+            Renderer.SaveImage("newImg.jpg", false);
         }
 
+        private void load_click(object sender, EventArgs e)
+        {
+            PhotoChooserTask photoChooserTask;
+
+            photoChooserTask = new PhotoChooserTask();
+            photoChooserTask.Completed += new EventHandler<PhotoResult>(photoChooserTask_Completed);
+
+            photoChooserTask.Show();
+
+        }
+
+        /// <summary>
+        /// A picture was chosen, load it up!
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        void photoChooserTask_Completed(object sender, PhotoResult e)
+        {
+
+            if (e.TaskResult == TaskResult.OK)
+            {
+
+                Renderer.LoadNewImage(toScreen, PictureDecoder.DecodeJpeg(e.ChosenPhoto));
+
+                /*Render.NewImg = PictureDecoder.DecodeJpeg(e.ChosenPhoto);
+                CallRender();
+                EnableSaveButtons(true);
+                ShowImage = false;
+                HideAbout();
+                */
+            }
+
+        }
 
 
     }

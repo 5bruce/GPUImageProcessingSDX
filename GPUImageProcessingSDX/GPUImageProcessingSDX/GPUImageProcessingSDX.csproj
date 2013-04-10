@@ -146,6 +146,8 @@
     <Content Include="Content\HLSL\ToonFXStructureTensorUsingSobelFilter.fxo" />
     <Content Include="Content\HLSL\ToonFXThresholdDogFilter.fxo" />
     <Content Include="Content\HLSL\ToonFXToonSegmentation.fxo" />
+    <Content Include="Content\tiger.dds" />
+    <Content Include="Content\nature-hd-background.dds" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>

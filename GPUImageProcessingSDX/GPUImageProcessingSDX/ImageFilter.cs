@@ -2,9 +2,11 @@
 using SharpDX.Toolkit.Graphics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace GPUImageProcessingSDX
 {
@@ -18,6 +20,7 @@ namespace GPUImageProcessingSDX
         public Dictionary<object, int> Inputs;
         public bool NeedRender = true;
         public string Path = string.Empty;
+        public KeyValuePair<WriteableBitmap, int> InputImageStream;
 
         public Effect RenderEffect
         {
@@ -144,7 +147,9 @@ namespace GPUImageProcessingSDX
                 {
                     string s = kvp.Value.ToString();
                     if (kvp.Value < 0) s = string.Empty;
+
                     RenderEffect.Parameters["InputTexture" + s].SetResource(kvp.Key);
+
 
                 }
                 else if (kvp.Key is ImageFilter)

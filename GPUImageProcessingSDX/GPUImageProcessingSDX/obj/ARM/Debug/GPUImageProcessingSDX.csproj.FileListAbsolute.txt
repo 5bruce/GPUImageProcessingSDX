@@ -65,3 +65,11 @@ C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUIm
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Toolkit.Game.xml
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Toolkit.Graphics.xml
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Toolkit.Input.xml
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Direct3D11.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.DXGI.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.MediaFoundation.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Toolkit.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Toolkit.Game.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Toolkit.Graphics.dll
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\SharpDX.Toolkit.Input.dll
