@@ -11549,7 +11549,7 @@
         </member>
         <member name="F:SharpDX.MediaFoundation.VideoArea.Area">
             <summary>	
-            <dd> <p> A <strong><see cref="T:SharpDX.DrawingSize"/></strong> structure that contains the width and height of the rectangle. </p> </dd>	
+            <dd> <p> A <strong><see cref="T:SharpDX.Size2"/></strong> structure that contains the width and height of the rectangle. </p> </dd>	
             </summary>	
             <!-- No matching elements were found for the following include tag --><include file=".\..\Documentation\CodeComments.xml" path="/comments/comment[@id='MFVideoArea::Area']/*"/>	
             <msdn-id>ms703850</msdn-id>	

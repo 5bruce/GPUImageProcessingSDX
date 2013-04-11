@@ -782,12 +782,12 @@
             </summary>
             <value>The window.</value>
         </member>
-        <member name="T:SharpDX.Toolkit.Game.DrawableComparer">
+        <member name="T:SharpDX.Toolkit.Game.DrawableSearcher">
             <summary>
             The comparer used to order <see cref="T:SharpDX.Toolkit.IDrawable"/> objects.
             </summary>
         </member>
-        <member name="T:SharpDX.Toolkit.Game.UpdateableComparer">
+        <member name="T:SharpDX.Toolkit.Game.UpdateableSearcher">
             <summary>
             The comparer used to order <see cref="T:SharpDX.Toolkit.IUpdateable"/> objects.
             </summary>

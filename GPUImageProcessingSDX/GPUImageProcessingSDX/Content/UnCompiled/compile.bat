@@ -1,0 +1,27 @@
+tkfxc ToonFXCMY64AutoConstrastColorFilter.fx /FoToonFXCMY64AutoConstrastColorFilter.fxo
+tkfxc ToonFXCMY64ColorFilter.fx /FoToonFXCMY64ColorFilter.fxo
+tkfxc RenderToScreen.fx /FoRenderToScreen.fxo
+tkfxc ToonFXRotateTxColorSpaceFilter.fx /FoToonFXRotateTxColorSpaceFilter.fxo
+tkfxc ToonFXToonSegmentation.fx /FoToonFXToonSegmentation.fxo
+tkfxc ToonFXQuantizeColorsUsingFlowFilter.fx /FoToonFXQuantizeColorsUsingFlowFilter.fxo
+tkfxc ToonFXFlowBilateralCurveFilter.fx /FoToonFXFlowBilateralCurveFilter.fxo
+tkfxc ToonFXFlowBilateralLineFilter.fx /FoToonFXFlowBilateralLineFilter.fxo
+tkfxc ToonFXFlowDogFilter.fx /FoToonFXFlowDogFilter.fxo
+tkfxc ToonFXPrepareForDogFilter.fx /FoToonFXPrepareForDogFilter.fxo
+
+tkfxc ToonFXGaussianFilter.fx /FoToonFXGaussianFilter.fxo
+
+tkfxc ToonFXLineIntegralConvolutionFilter.fx /FoToonFXLineIntegralConvolutionFilter.fxo
+tkfxc ToonFXAutoGammaCorrectFilter.fx /FoToonFXAutoGammaCorrectFilter.fxo
+tkfxc ToonFXThresholdDogFilter.fx /FoToonFXThresholdDogFilter.fxo
+
+tkfxc ToonFXFlowFromStructureTensor.fx /FoToonFXFlowFromStructureTensor.fxo
+tkfxc ToonFXStructureTensorUsingSobelFilter.fx /FoToonFXStructureTensorUsingSobelFilter.fxo
+
+tkfxc COMBINE.fx /FoCOMBINE.fxo
+
+tkfxc GPUImageMultiplyBlendFilter.fx /FoGPUImageMultiplyBlendFilter.fxo
+
+tkfxc GPUImageContrastFilter.fx /FoGPUImageContrastFilter.fxo
+
+copy *.fxo ..\HLSL /All

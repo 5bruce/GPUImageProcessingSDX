@@ -124,13 +124,13 @@
     <Content Include="ChangeOrientation.fxo" />
     <None Include="Content\compile.bat" />
     <Content Include="Content\Blur.fx" />
-    <Content Include="Content\RenderToScreen.fxo" />
     <Content Include="Content\BLUR2.fxo" />
+    <Content Include="Content\tiger.dds" />
+    <Content Include="Content\nature-hd-background.dds" />
+    <Content Include="Content\HLSL\RenderToScreen.fxo" />
     <Content Include="Content\HLSL\COMBINE.fxo" />
-    <Content Include="Content\HLSL\deleteme.fxo" />
     <Content Include="Content\HLSL\GPUImageContrastFilter.fxo" />
     <Content Include="Content\HLSL\GPUImageMultiplyBlendFilter.fxo" />
-    <Content Include="Content\HLSL\RenderToScreen.fxo" />
     <Content Include="Content\HLSL\ToonFXAutoGammaCorrectFilter.fxo" />
     <Content Include="Content\HLSL\ToonFXCMY64AutoConstrastColorFilter.fxo" />
     <Content Include="Content\HLSL\ToonFXCMY64ColorFilter.fxo" />
@@ -146,8 +146,6 @@
     <Content Include="Content\HLSL\ToonFXStructureTensorUsingSobelFilter.fxo" />
     <Content Include="Content\HLSL\ToonFXThresholdDogFilter.fxo" />
     <Content Include="Content\HLSL\ToonFXToonSegmentation.fxo" />
-    <Content Include="Content\tiger.dds" />
-    <Content Include="Content\nature-hd-background.dds" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
@@ -181,38 +179,39 @@
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Reference Include="SharpDX, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SharpDX_2.5\Bin\Standard-wp8-ARM\SharpDX.dll</HintPath>
+      <HintPath>..\..\..\sharpdx\Bin\Standard-wp8-ARM\SharpDX.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D11, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SharpDX_2.5\Bin\Standard-wp8-ARM\SharpDX.Direct3D11.dll</HintPath>
+      <HintPath>..\..\..\sharpdx\Bin\Standard-wp8-ARM\SharpDX.Direct3D11.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.DXGI, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SharpDX_2.5\Bin\Standard-wp8-ARM\SharpDX.DXGI.dll</HintPath>
+      <HintPath>..\..\..\sharpdx\Bin\Standard-wp8-ARM\SharpDX.DXGI.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.MediaFoundation, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SharpDX_2.5\Bin\Standard-wp8-ARM\SharpDX.MediaFoundation.dll</HintPath>
+      <HintPath>..\..\..\sharpdx\Bin\Standard-wp8-ARM\SharpDX.MediaFoundation.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Toolkit, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SharpDX_2.5\Bin\Standard-wp8-ARM\SharpDX.Toolkit.dll</HintPath>
+      <HintPath>..\..\..\sharpdx\Bin\Standard-wp8-ARM\SharpDX.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Toolkit.Game, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SharpDX_2.5\Bin\Standard-wp8-ARM\SharpDX.Toolkit.Game.dll</HintPath>
+      <HintPath>..\..\..\sharpdx\Bin\Standard-wp8-ARM\SharpDX.Toolkit.Game.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Toolkit.Graphics, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SharpDX_2.5\Bin\Standard-wp8-ARM\SharpDX.Toolkit.Graphics.dll</HintPath>
+      <HintPath>..\..\..\sharpdx\Bin\Standard-wp8-ARM\SharpDX.Toolkit.Graphics.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Toolkit.Input, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SharpDX_2.5\Bin\Standard-wp8-ARM\SharpDX.Toolkit.Input.dll</HintPath>
+      <HintPath>..\..\..\sharpdx\Bin\Standard-wp8-ARM\SharpDX.Toolkit.Input.dll</HintPath>
     </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />

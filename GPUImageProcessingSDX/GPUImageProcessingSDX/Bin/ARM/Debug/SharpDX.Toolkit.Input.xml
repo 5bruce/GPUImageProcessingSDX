@@ -206,6 +206,29 @@
             <param name="pressedKeys">The destination array</param>
             <param name="index">The index of element in array. Increased for evey new element</param>
         </member>
+        <member name="M:SharpDX.Toolkit.Input.KeyboardState.Equals(SharpDX.Toolkit.Input.KeyboardState)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
+        </member>
+        <member name="M:SharpDX.Toolkit.Input.KeyboardState.op_Equality(SharpDX.Toolkit.Input.KeyboardState,SharpDX.Toolkit.Input.KeyboardState)">
+            <summary>
+            Implements the ==.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:SharpDX.Toolkit.Input.KeyboardState.op_Inequality(SharpDX.Toolkit.Input.KeyboardState,SharpDX.Toolkit.Input.KeyboardState)">
+            <summary>
+            Implements the !=.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>The result of the operator.</returns>
+        </member>
         <member name="P:SharpDX.Toolkit.Input.KeyboardState.Item(SharpDX.Toolkit.Input.Keys)">
             <summary>
             Gets the state of specified key
@@ -288,6 +311,12 @@
             </summary>
             <returns>A snapshot of current mouse state</returns>
         </member>
+        <member name="M:SharpDX.Toolkit.Input.IMouseService.SetPosition(SharpDX.Vector2)">
+            <summary>
+            Sets the position of mouse pointer
+            </summary>
+            <param name="point">The desired position</param>
+        </member>
         <member name="T:SharpDX.Toolkit.Input.KeyState">
             <summary>
             Represents the state of a keyboard key or mouse button
@@ -363,6 +392,13 @@
             <returns>A snapshot of current mouse state</returns>
             <exception cref="T:System.NullReferenceException">Is thrown if <see cref="M:SharpDX.Toolkit.Input.MouseManager.Initialize"/> is not called.</exception>
         </member>
+        <member name="M:SharpDX.Toolkit.Input.MouseManager.SetPosition(SharpDX.Vector2)">
+            <summary>
+            Sets the position of mouse pointer
+            </summary>
+            <param name="point">The desired position in the range X/Y [0,1]</param>
+            <exception cref="T:System.InvalidOperationException">Is thrown when <see cref="T:SharpDX.Toolkit.Input.MouseManager"/> is not initialized</exception>
+        </member>
         <member name="M:SharpDX.Toolkit.Input.MouseManager.HandleMouseDown(SharpDX.Toolkit.Input.MouseButton)">
             <summary>
             Handler for <see cref="E:SharpDX.Toolkit.Input.MousePlatform.MouseDown"/> event
@@ -395,7 +431,7 @@
             </summary>
             <remarks>Is inmutable.</remarks>
         </member>
-        <member name="M:SharpDX.Toolkit.Input.MouseState.#ctor(SharpDX.Toolkit.Input.ButtonState,SharpDX.Toolkit.Input.ButtonState,SharpDX.Toolkit.Input.ButtonState,SharpDX.Toolkit.Input.ButtonState,SharpDX.Toolkit.Input.ButtonState,System.Int32,System.Int32,System.Int32)">
+        <member name="M:SharpDX.Toolkit.Input.MouseState.#ctor(SharpDX.Toolkit.Input.ButtonState,SharpDX.Toolkit.Input.ButtonState,SharpDX.Toolkit.Input.ButtonState,SharpDX.Toolkit.Input.ButtonState,SharpDX.Toolkit.Input.ButtonState,System.Single,System.Single,System.Int32)">
             <summary>
             Initializes a new instance of the <see cref="T:SharpDX.Toolkit.Input.MouseState"/> structure.
             </summary>
@@ -407,6 +443,29 @@
             <param name="x">X-position of the mouse cursor</param>
             <param name="y">Y-position of the mouse cursor</param>
             <param name="wheelDelta">Delta of mouse wheel relative to previous input event</param>
+        </member>
+        <member name="M:SharpDX.Toolkit.Input.MouseState.Equals(SharpDX.Toolkit.Input.MouseState)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
+        </member>
+        <member name="M:SharpDX.Toolkit.Input.MouseState.op_Equality(SharpDX.Toolkit.Input.MouseState,SharpDX.Toolkit.Input.MouseState)">
+            <summary>
+            Implements the ==.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:SharpDX.Toolkit.Input.MouseState.op_Inequality(SharpDX.Toolkit.Input.MouseState,SharpDX.Toolkit.Input.MouseState)">
+            <summary>
+            Implements the !=.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>The result of the operator.</returns>
         </member>
         <member name="P:SharpDX.Toolkit.Input.MouseState.Left">
             <summary>
@@ -435,12 +494,12 @@
         </member>
         <member name="P:SharpDX.Toolkit.Input.MouseState.X">
             <summary>
-            X-position of the mouse cursor
+            X-position of the mouse cursor in the range [0,1]
             </summary>
         </member>
         <member name="P:SharpDX.Toolkit.Input.MouseState.Y">
             <summary>
-            Y-position of the mouse cursor
+            Y-position of the mouse cursor in the range [0,1]
             </summary>
         </member>
         <member name="P:SharpDX.Toolkit.Input.MouseState.WheelDelta">
@@ -605,6 +664,13 @@
         <member name="M:SharpDX.Toolkit.Input.PointerPlatformWP8.BindWindow(System.Object)">
             <inheritdoc />
         </member>
+        <member name="M:SharpDX.Toolkit.Input.PointerPlatformWP8.BindManipulationEvents(System.Windows.Controls.DrawingSurface)">
+            <summary>
+            Binds the corresponding event handler to the provided <see cref="T:System.Windows.Controls.DrawingSurfaceBackgroundGrid"/>
+            </summary>
+            <param name="drawingSurface">An instance of <see cref="T:System.Windows.Controls.DrawingSurfaceBackgroundGrid"/> whose events needs to be bound to</param>
+            <exception cref="T:System.ArgumentNullException">Is thrown if <paramref name="drawingSurface"/> is null</exception>
+        </member>
         <member name="M:SharpDX.Toolkit.Input.PointerPlatformWP8.BindManipulationEvents(System.Windows.Controls.DrawingSurfaceBackgroundGrid)">
             <summary>
             Binds the corresponding event handler to the provided <see cref="T:System.Windows.Controls.DrawingSurfaceBackgroundGrid"/>
@@ -634,6 +700,29 @@
             <summary>
             Represents a platform-independent information about a pointer event.
             </summary>
+        </member>
+        <member name="M:SharpDX.Toolkit.Input.PointerPoint.Equals(SharpDX.Toolkit.Input.PointerPoint)">
+            <summary>
+            Indicates whether the current object is equal to another object of the same type.
+            </summary>
+            <param name="other">An object to compare with this object.</param>
+            <returns>true if the current object is equal to the <paramref name="other" /> parameter; otherwise, false.</returns>
+        </member>
+        <member name="M:SharpDX.Toolkit.Input.PointerPoint.op_Equality(SharpDX.Toolkit.Input.PointerPoint,SharpDX.Toolkit.Input.PointerPoint)">
+            <summary>
+            Implements the ==.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>The result of the operator.</returns>
+        </member>
+        <member name="M:SharpDX.Toolkit.Input.PointerPoint.op_Inequality(SharpDX.Toolkit.Input.PointerPoint,SharpDX.Toolkit.Input.PointerPoint)">
+            <summary>
+            Implements the !=.
+            </summary>
+            <param name="left">The left.</param>
+            <param name="right">The right.</param>
+            <returns>The result of the operator.</returns>
         </member>
         <member name="P:SharpDX.Toolkit.Input.PointerPoint.EventType">
             <summary>
@@ -866,17 +955,23 @@
             </summary>
             <returns></returns>
         </member>
+        <member name="M:SharpDX.Toolkit.Input.MousePlatform.SetLocation(SharpDX.Vector2)">
+            <summary>
+            Sets the mouse cursor location.
+            </summary>
+            <param name="point">The position in space [0,1].</param>
+            <remarks>Supported only on Desktop platform. On other platforms the call of this method has no effect.</remarks>
+        </member>
         <member name="M:SharpDX.Toolkit.Input.MousePlatform.BindWindow(System.Object)">
             <summary>
             Derived classes should implement platform-specific event bindings in this method
             </summary>
             <param name="nativeWindow">The native window object reference</param>
         </member>
-        <member name="M:SharpDX.Toolkit.Input.MousePlatform.GetLocationInternal(System.Object)">
+        <member name="M:SharpDX.Toolkit.Input.MousePlatform.GetLocationInternal">
             <summary>
             Derived classes should implement platform-specific code to retrieve the mouse cursor location
             </summary>
-            <param name="nativeWindow">The native window object reference</param>
         </member>
         <member name="M:SharpDX.Toolkit.Input.MousePlatform.OnMouseDown(SharpDX.Toolkit.Input.MouseButton)">
             <summary>

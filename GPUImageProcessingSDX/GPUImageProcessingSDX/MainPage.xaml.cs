@@ -14,6 +14,7 @@ using Microsoft.Phone.Tasks;
 using Microsoft.Phone;
 using System.IO;
 using SharpDX.Toolkit.Graphics;
+using System.Windows.Media.Imaging;
 
 namespace GPUImageProcessingSDX
 {
@@ -83,34 +84,36 @@ namespace GPUImageProcessingSDX
 
         public void AddEffects()
         {
-            Renderer = new GPUImageGame();
 
+            Renderer = new GPUImageGame();
+            
             structureTensor = new ImageFilter(@"HLSL\ToonFXStructureTensorUsingSobelFilter.fxo", new Parameter("ImageSize", null));
 
             tensorSmoothing = new ImageFilter(@"HLSL\ToonFXGaussianFilter.fxo", new Parameter("texelWidthOffset", 0.0012f),
-               new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_flow", 2.66f));
+                new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_flow", 2.66f));
 
             flow = new ImageFilter(@"HLSL\ToonFXFlowFromStructureTensor.fxo");
 
             prepareForDOG = new ImageFilter(@"HLSL\ToonFXPrepareForDogFilter.fxo");
 
             DOG = new ImageFilter(@"HLSL\ToonFXFlowDogFilter.fxo", new Parameter("texelWidthOffset", 0.0012f),
-               new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_dog", 0.9f + 0.9f * 1.0f));
+                new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_dog", 0.9f + 0.9f * 1.0f));
 
             Threshold = new ImageFilter(@"HLSL\ToonFXThresholdDogFilter.fxo", new Parameter("edge_offset", 0.17f),
-               new Parameter("grey_offset", 2.5f), new Parameter("black_offset", 2.65f));
+                new Parameter("grey_offset", 2.5f), new Parameter("black_offset", 2.65f));
 
             LIC = new ImageFilter(@"HLSL\ToonFXLineIntegralConvolutionFilter.fxo", new Parameter("texelWidthOffset", 0.0012f),
-               new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_c", 4.97f));
-
-            GPUImageGame.InitialFilters.Add(toScreen = new ImageFilter("nature-hd-background.dds"));
+                new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_c", 4.97f));
             
+            GPUImageGame.InitialFilters.Add(toScreen = new ImageFilter());
+
+           
             structureTensor.AddInput(toScreen);
             prepareForDOG.AddInput(toScreen);
 
             tensorSmoothing.AddInput(structureTensor);
             flow.AddInput(tensorSmoothing);
-            
+
             DOG.AddInput(prepareForDOG, 1);
             DOG.AddInput(flow, 2);
 
@@ -118,10 +121,11 @@ namespace GPUImageProcessingSDX
             LIC.AddInput(flow, 2);
 
             Threshold.AddInput(LIC);
-
+            
             Renderer.TerminalFilter = Threshold;
 
             Renderer.Run(DisplayGrid);
+
         }
 
       
@@ -153,6 +157,8 @@ namespace GPUImageProcessingSDX
             {
 
                 Renderer.LoadNewImage(toScreen, PictureDecoder.DecodeJpeg(e.ChosenPhoto));
+
+
 
                 /*Render.NewImg = PictureDecoder.DecodeJpeg(e.ChosenPhoto);
                 CallRender();

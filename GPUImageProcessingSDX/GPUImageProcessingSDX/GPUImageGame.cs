@@ -12,6 +12,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 
 namespace GPUImageProcessingSDX
@@ -41,23 +42,28 @@ namespace GPUImageProcessingSDX
 
         public DisplayOrientation Orientation = DisplayOrientation.Portrait;
 
+
         /// <summary>
         /// basic constructor. Just setting things up - pretty standard
         /// </summary>
         public GPUImageGame()
         {
+
+
             graphicsDeviceManager = new GraphicsDeviceManager(this);
             InitialFilters = new List<ImageFilter>();
             Filters = new List<ImageFilter>();
             Content.RootDirectory = "Content";
+
+
         }
 
         private RenderTarget2D CreateRT()
         {
             if(Orientation == DisplayOrientation.Portrait)
-            return RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm);
+            return ToDisposeContent(RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm));
             else
-                return RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Height, GraphicsDevice.BackBuffer.Width, PixelFormat.B8G8R8A8.UNorm);
+                return ToDisposeContent(RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Height, GraphicsDevice.BackBuffer.Width, PixelFormat.B8G8R8A8.UNorm));
         }
 
         /// <summary>
@@ -100,31 +106,33 @@ namespace GPUImageProcessingSDX
             return success;
         }
 
-        public void LoadNewImage(ImageFilter filter, WriteableBitmap inputImage, int number = -1)
+        public void LoadNewImage(ImageFilter filter, WriteableBitmap inputImage, params int[] list)
         {
-            if (number == -1)
+            if (list.Length == 0)
             {
                 filter.Inputs.Clear();
+                filter.OverwriteWith.Add(-1);
             }
             else
             {
                 for (int i = 0; i < filter.Inputs.Keys.Count; i++)
                 {
-                    if (filter.Inputs.ElementAt(i).Value == number)
+                    foreach (int n in list)
                     {
-                        filter.Inputs.Remove(filter.Inputs.ElementAt(i));
-                        break;
+                        if (filter.Inputs.ElementAt(i).Value == n)
+                        {
+                            filter.Inputs.Remove(filter.Inputs.ElementAt(i));
+                            filter.OverwriteWith.Add(n);
+                        }
                     }
                 }
             }
-            filter.InputImageStream = new KeyValuePair<WriteableBitmap, int>(inputImage, number);
+
+            filter.Path = string.Empty;
+            filter.NewImg = inputImage;
+
             NeedsRender = true;
         }
-
-
-
-
-
 
         /// <summary>
         /// This is called once the GraphicsDevice is all loaded up. 
@@ -136,48 +144,55 @@ namespace GPUImageProcessingSDX
             FileStream fs = File.OpenRead("ChangeOrientation.fxo");
             try
             {
-
                 byte[] bytes = new byte[fs.Length];
                 fs.Read(bytes, 0, Convert.ToInt32(fs.Length));
                 fs.Close();
-                ChangeOrientation = new Effect(GraphicsDevice, bytes);
-
+                ChangeOrientation = ToDisposeContent(new Effect(GraphicsDevice, bytes));
             }
             catch (Exception e)
             {
 
             }
+
             RenderImage = Content.Load<Effect>(@"HLSL\RenderToScreen.fxo");
 
             foreach (ImageFilter i in InitialFilters)
             {
-                if (i.InputImageStream.Key == null || i.InputImageStream.Key == null)
+                
+               
+                if (File.Exists(Content.RootDirectory + "\\" + i.Path))
                 {
-                    Texture2D tempTex = Content.Load<Texture2D>(i.Path);
+                    Texture2D tempTex = ToDisposeContent(Content.Load<Texture2D>(i.Path));
 
                     if (CheckImage(tempTex.Width, tempTex.Height))
                     {
-                        i.RenderEffect = RenderImage;
-                        i.RenderTarget = CreateRT();
+
                         i.AddInput(tempTex);
                     }
                 }
-                else
+                else if (i.OverwriteWith.Count > 0)
                 {
-                    Texture2D tempTex = ToDisposeContent(Texture2D.New(GraphicsDevice, i.InputImageStream.Key.PixelWidth, i.InputImageStream.Key.PixelHeight, PixelFormat.B8G8R8A8.UNorm));
-                    tempTex.SetData(i.InputImageStream.Key.Pixels);
-
-                    if (CheckImage(tempTex.Width, tempTex.Height))
+                    try
                     {
-
-                        i.RenderEffect = RenderImage;
-                        i.RenderTarget = CreateRT();
-
-                        i.AddInput(tempTex, i.InputImageStream.Value);
+                        Texture2D texture = ToDisposeContent(Texture2D.New(GraphicsDevice, i.NewImg.PixelWidth, i.NewImg.PixelHeight, PixelFormat.B8G8R8A8.UNorm));
+                        texture.SetData(i.NewImg.Pixels);
+                        foreach (int n in i.OverwriteWith)
+                        {
+                            i.AddInput(texture, n);
+                        }
                     }
-
+                    finally
+                    {
+                        i.OverwriteWith.Clear();
+                        i.NewImg = null;
+                        GC.Collect();
+                    }
                 }
 
+                i.RenderEffect = RenderImage;
+                i.RenderTarget = CreateRT();
+
+                
             }
 
             foreach (ImageFilter i in InitialFilters)
@@ -194,7 +209,7 @@ namespace GPUImageProcessingSDX
 
         private void LoadContentRec(ImageFilter cur)
         {
-            cur.RenderEffect = Content.Load<Effect>(cur.Path);
+            cur.RenderEffect = ToDisposeContent(Content.Load<Effect>(cur.Path));
             cur.RenderTarget = CreateRT();
 
             foreach (Parameter p in cur.Parameters)

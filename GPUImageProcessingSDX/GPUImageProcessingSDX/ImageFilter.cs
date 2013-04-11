@@ -20,7 +20,10 @@ namespace GPUImageProcessingSDX
         public Dictionary<object, int> Inputs;
         public bool NeedRender = true;
         public string Path = string.Empty;
-        public KeyValuePair<WriteableBitmap, int> InputImageStream;
+        public bool InitialRead = false;
+        public WriteableBitmap NewImg;
+        public List<int> OverwriteWith;
+        
 
         public Effect RenderEffect
         {
@@ -34,14 +37,21 @@ namespace GPUImageProcessingSDX
             set { m_RenderTarget = value; }
         }
 
-        public ImageFilter(string p, params Parameter[] list)
+
+
+        public ImageFilter(string p = "", params Parameter[] list)
         {
 
             Children = new List<ImageFilter>();
             Parents = new List<ImageFilter>();
             Inputs = new Dictionary<object, int>();
 
-            Path = p;
+            OverwriteWith = new List<int>();
+
+            if (p != "")
+            {
+                Path = p;
+            }
 
             Parameters = new List<Parameter>();
 
