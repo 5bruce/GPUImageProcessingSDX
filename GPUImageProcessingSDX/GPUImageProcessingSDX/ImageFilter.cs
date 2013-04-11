@@ -138,7 +138,7 @@ namespace GPUImageProcessingSDX
                                 case EffectParameterType.UInt8: RenderEffect.Parameters[param.Name].SetValue((uint)param.Value); break;
                             }
                         }
-                        catch (Exception e)
+                        catch (Exception)
                         {
                             System.Diagnostics.Debug.WriteLine("Could not convert the parameter type to the corresponding type in the effect.\n " +
                                 "Make sure your types in the Effect and in the Parameter are the same! ......." + param.Name + "....." + this.RenderEffect.Name);

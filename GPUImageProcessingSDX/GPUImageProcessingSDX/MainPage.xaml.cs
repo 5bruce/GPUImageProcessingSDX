@@ -15,6 +15,7 @@ using Microsoft.Phone;
 using System.IO;
 using SharpDX.Toolkit.Graphics;
 using System.Windows.Media.Imaging;
+using Microsoft.Xna.Framework.Media;
 
 namespace GPUImageProcessingSDX
 {
@@ -49,6 +50,7 @@ namespace GPUImageProcessingSDX
         ImageFilter structureTensor, tensorSmoothing, flow, prepareForDOG, DOG, Threshold, LIC, toScreen;
 
         public static Dispatcher MyDispatcher;
+        CameraCaptureTask ctask;
 
         // Constructor
         public MainPage()
@@ -71,6 +73,11 @@ namespace GPUImageProcessingSDX
             load.IsEnabled = true;
             appBar.MenuItems.Add(load);
 
+            ApplicationBarMenuItem newImg = new ApplicationBarMenuItem("new");
+            newImg.Click += new EventHandler(newImg_click);
+            newImg.IsEnabled = true;
+            appBar.MenuItems.Add(newImg);
+
             ApplicationBarMenuItem save = new ApplicationBarMenuItem("Save");
             save.Click += new EventHandler(save_click);
             save.IsEnabled = true;
@@ -82,6 +89,9 @@ namespace GPUImageProcessingSDX
 
         }
 
+        /// <summary>
+        /// Add all the hlsl files here
+        /// </summary>
         public void AddEffects()
         {
 
@@ -128,48 +138,107 @@ namespace GPUImageProcessingSDX
 
         }
 
-      
+        /// <summary>
+        /// Handles when the app is navigated to from:
+        ///   o rightclick > apps... > *APPNAME*
+        ///   o rickclick > Edit > *APPNAME*
+        ///   o Launched from lenses
+        /// </summary>
+        /// <param name="e"></param>
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            
+            // Get a dictionary of query string keys and values.
+            IDictionary<string, string> queryStrings = this.NavigationContext.QueryString;
+
+            // Ensure that there is at least one key in the query string, and check whether the "token" key is present.
+            if (queryStrings.ContainsKey("token"))
+            {
+                //launched from apps...
+                MediaLibrary library = new MediaLibrary();
+                Picture picture = library.GetPictureFromToken(queryStrings["token"]);
+                Renderer.LoadNewImage(toScreen, PictureDecoder.DecodeJpeg(picture.GetImage()));
+
+            }
+            else if (queryStrings.ContainsKey("FileId"))
+            {
+                //launched from Edit
+                MediaLibrary library = new MediaLibrary();
+                Picture picture = library.GetPictureFromToken(queryStrings["FileId"]);
+                Renderer.LoadNewImage(toScreen, PictureDecoder.DecodeJpeg(picture.GetImage()));
+
+            }
+            else
+            {
+                //launched from lens
+                if (App.LaunchedFromLens)
+                {
+                    newImg_click(null, new EventArgs());
+                    App.LaunchedFromLens = false;
+                }
+            }
+        }
+        
+        /// <summary>
+        /// User wants to save
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void save_click(object sender, EventArgs e)
         {
             Renderer.SaveImage("newImg.jpg", false);
         }
 
+        /// <summary>
+        /// User would like to load an existing photo from library
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void load_click(object sender, EventArgs e)
         {
             PhotoChooserTask photoChooserTask;
 
             photoChooserTask = new PhotoChooserTask();
-            photoChooserTask.Completed += new EventHandler<PhotoResult>(photoChooserTask_Completed);
+
+            //picture loaded
+            photoChooserTask.Completed += (s, ev) =>
+            {
+                if (ev.TaskResult == TaskResult.OK)
+                {
+                    //load to initial filter
+                    Renderer.LoadNewImage(toScreen, PictureDecoder.DecodeJpeg(ev.ChosenPhoto));
+
+                }
+            };
 
             photoChooserTask.Show();
 
         }
 
         /// <summary>
-        /// A picture was chosen, load it up!
+        /// User wants to take a new picture with the camera
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        void photoChooserTask_Completed(object sender, PhotoResult e)
+        void newImg_click(object sender, EventArgs e)
         {
 
-            if (e.TaskResult == TaskResult.OK)
+            ctask = new CameraCaptureTask();
+
+            //Photo captured
+            ctask.Completed += (s, ev) =>
             {
+                if (ev.TaskResult == TaskResult.OK)
+                {
+                    //load to initial filter
+                    Renderer.LoadNewImage(toScreen, PictureDecoder.DecodeJpeg(ev.ChosenPhoto));
 
-                Renderer.LoadNewImage(toScreen, PictureDecoder.DecodeJpeg(e.ChosenPhoto));
+                }
+            };
 
-
-
-                /*Render.NewImg = PictureDecoder.DecodeJpeg(e.ChosenPhoto);
-                CallRender();
-                EnableSaveButtons(true);
-                ShowImage = false;
-                HideAbout();
-                */
-            }
+            ctask.Show();
 
         }
-
 
     }
 }

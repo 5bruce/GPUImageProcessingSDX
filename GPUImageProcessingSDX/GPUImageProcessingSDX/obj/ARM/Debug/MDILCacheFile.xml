@@ -1,5 +1,5 @@
-﻿<xapCache source="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\GPUImageProcessingSDX_Debug_ARM.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="4/11/2013 1:05:07 PM">
-  <file source="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\.in.dll" archivePath=".in.dll" lastWriteTime="4/11/2013 1:05:05 PM" />
+﻿<xapCache source="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\GPUImageProcessingSDX_Debug_ARM.xap" wasSigned="False" certificateThumbprint="" TimeStampUrl="" lastWriteTime="4/11/2013 3:05:55 PM">
+  <file source="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\.in.dll" archivePath=".in.dll" lastWriteTime="4/11/2013 3:05:53 PM" />
   <file source="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Content\bigWalt.dds" archivePath="Content\bigWalt.dds" lastWriteTime="3/17/2013 12:10:58 PM" />
   <file source="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Content\Blur.fxo" archivePath="Content\Blur.fxo" lastWriteTime="3/17/2013 12:10:58 PM" />
   <file source="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\ChangeOrientation.fx" archivePath="ChangeOrientation.fx" lastWriteTime="4/9/2013 10:25:13 AM" />
@@ -60,5 +60,5 @@
   <file source="C:\Users\paul\Documents\GitHub\sharpdx\Bin\Standard-wp8-ARM\SharpDX.WP8.dll" archivePath="SharpDX.WP8.dll" lastWriteTime="4/11/2013 12:29:42 PM" />
   <file source="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Assets\ApplicationIcon.png" archivePath="Assets\ApplicationIcon.png" lastWriteTime="3/17/2013 12:10:57 PM" />
   <file source="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Assets\Tiles\FlipCycleTileMedium.png" archivePath="Assets\Tiles\FlipCycleTileMedium.png" lastWriteTime="3/17/2013 12:10:57 PM" />
-  <file source="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="4/9/2013 11:28:18 AM" />
+  <file source="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\Properties\WMAppManifest.xml" archivePath="WMAppManifest.xml" lastWriteTime="4/11/2013 1:40:48 PM" />
 </xapCache>

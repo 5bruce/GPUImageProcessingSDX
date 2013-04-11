@@ -17,6 +17,7 @@ namespace GPUImageProcessingSDX
         /// </summary>
         /// <returns>The root frame of the Phone Application.</returns>
         public static PhoneApplicationFrame RootFrame { get; private set; }
+        public static bool LaunchedFromLens = false;
 
         /// <summary>
         /// Constructor for the Application object.

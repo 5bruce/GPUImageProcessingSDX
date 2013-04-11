@@ -19,7 +19,11 @@ namespace GPUImageProcessingSDX
 {
     class GPUImageGame : Game
     {
-
+        /// <summary>
+        /// Print out your memory usage
+        /// </summary>
+        /// <param name="before"></param>
+        /// <param name="after"></param>
         public static void MemoryUse(string before = "", string after = "")
         {
             System.Diagnostics.Debug.WriteLine(before);
@@ -27,41 +31,56 @@ namespace GPUImageProcessingSDX
             System.Diagnostics.Debug.WriteLine(after);
         }
 
+        #region GLOBALS
         GraphicsDeviceManager graphicsDeviceManager;
-        //the effect to change the texture
+        /// <summary>
+        /// basic effect to render an image to the screen
+        /// </summary>
         Effect RenderImage;
+        /// <summary>
+        /// will change if an image is portrait vs landscape
+        /// </summary>
         Effect ChangeOrientation;
+        /// <summary>
+        /// the final filter in the chain (you want this guys output)
+        /// </summary>
         public ImageFilter TerminalFilter;
-
-        public List<ImageFilter> Filters;
-
+        /// <summary>
+        /// A list that will hold all of the initial filters. These are filters which have textures/images as input instead of other filters
+        /// </summary>
         public static List<ImageFilter> InitialFilters;
+        /// <summary>
+        /// true if the scene needs to be rendered (when a parameter changes)
+        /// </summary>
         public static bool NeedsRender = true;
 
-        private RenderTarget2D OrientationRT;
-
+        /// <summary>
+        /// When a new image is loaded, orientation is set to be the orientation of that image
+        /// </summary>
         public DisplayOrientation Orientation = DisplayOrientation.Portrait;
-
+        #endregion
 
         /// <summary>
-        /// basic constructor. Just setting things up - pretty standard
+        /// Basic constructor - initializes everything
         /// </summary>
         public GPUImageGame()
         {
 
-
             graphicsDeviceManager = new GraphicsDeviceManager(this);
             InitialFilters = new List<ImageFilter>();
-            Filters = new List<ImageFilter>();
             Content.RootDirectory = "Content";
-
 
         }
 
-        private RenderTarget2D CreateRT()
+        /// <summary>
+        /// creates a new RenderTarget2D in the correct orientation
+        /// </summary>
+        /// <returns>the new RenderTarget2D</returns>
+        private RenderTarget2D CreateRenderTarget2D()
         {
+            //the only difference here is if the RT is created portrait or landscape
             if(Orientation == DisplayOrientation.Portrait)
-            return ToDisposeContent(RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm));
+                return ToDisposeContent(RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm));
             else
                 return ToDisposeContent(RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Height, GraphicsDevice.BackBuffer.Width, PixelFormat.B8G8R8A8.UNorm));
         }
@@ -77,10 +96,10 @@ namespace GPUImageProcessingSDX
         {
             bool success = true;
             float ratio = height / width;
-
+            
+            //check the ratio of the image to determine if it is portrait or landscape
             if (ratio < 2.2f && ratio > 1.2f)
             {
-               
                 Orientation = DisplayOrientation.Portrait;
             }
             else if (1.0f / ratio < 2.2f && 1.0f / ratio > 1.2f)
@@ -90,6 +109,7 @@ namespace GPUImageProcessingSDX
             }
             else if ((ratio < 1.2f && ratio >= 1.0f) || (1.0f / ratio < 1.2f && 1.0f / ratio >= 1.0f))
             {
+                //the image was square(ish). Ask the user if they want to use this (it will squish and skew)
                 MainPage.MyDispatcher.BeginInvoke(new Action(() =>
                 {
                     MessageBoxResult res = MessageBox.Show("This picture had a bad ratio. Are you sure you want to use it?", "Bad Ratio", MessageBoxButton.OKCancel);
@@ -106,15 +126,23 @@ namespace GPUImageProcessingSDX
             return success;
         }
 
+        /// <summary>
+        /// When a new image is loaded (camera capture or photo chooser tasks), add it as input to the selected filter
+        /// </summary>
+        /// <param name="filter"></param>
+        /// <param name="inputImage"></param>
+        /// <param name="list"></param>
         public void LoadNewImage(ImageFilter filter, WriteableBitmap inputImage, params int[] list)
         {
+            //if there we no params, clear all inputs, and we want to add the input at spot -1 (= string.Empty)
             if (list.Length == 0)
             {
                 filter.Inputs.Clear();
-                filter.OverwriteWith.Add(-1);
+                filter.OverwriteWith.Add(-1);//add a -1 to the list
             }
             else
             {
+                //otherwise for each current input, remove it if it's position is in the int[] list
                 for (int i = 0; i < filter.Inputs.Keys.Count; i++)
                 {
                     foreach (int n in list)
@@ -128,6 +156,7 @@ namespace GPUImageProcessingSDX
                 }
             }
 
+            //we do not want to load an image from the content
             filter.Path = string.Empty;
             filter.NewImg = inputImage;
 
@@ -140,40 +169,35 @@ namespace GPUImageProcessingSDX
         /// </summary>
         protected override void LoadContent()
         {
-
+            //Read in the changeOrientation effect, and load it up
             FileStream fs = File.OpenRead("ChangeOrientation.fxo");
-            try
-            {
-                byte[] bytes = new byte[fs.Length];
-                fs.Read(bytes, 0, Convert.ToInt32(fs.Length));
-                fs.Close();
-                ChangeOrientation = ToDisposeContent(new Effect(GraphicsDevice, bytes));
-            }
-            catch (Exception e)
-            {
-
-            }
-
-            RenderImage = Content.Load<Effect>(@"HLSL\RenderToScreen.fxo");
+            
+            byte[] bytes = new byte[fs.Length];
+            fs.Read(bytes, 0, Convert.ToInt32(fs.Length));
+            fs.Close();
+            ChangeOrientation = ToDisposeContent(new Effect(GraphicsDevice, bytes));
+            
+            RenderImage = ToDisposeContent(Content.Load<Effect>(@"HLSL\RenderToScreen.fxo"));
 
             foreach (ImageFilter i in InitialFilters)
             {
                 
-               
+                //if the file exists, we want to load it from content
                 if (File.Exists(Content.RootDirectory + "\\" + i.Path))
                 {
                     Texture2D tempTex = ToDisposeContent(Content.Load<Texture2D>(i.Path));
 
                     if (CheckImage(tempTex.Width, tempTex.Height))
                     {
-
                         i.AddInput(tempTex);
                     }
                 }
                 else if (i.OverwriteWith.Count > 0)
                 {
+                    //make sure there is atleast 1 input to load
                     try
                     {
+                        //load the texture from the writeableBitmap passed in
                         Texture2D texture = ToDisposeContent(Texture2D.New(GraphicsDevice, i.NewImg.PixelWidth, i.NewImg.PixelHeight, PixelFormat.B8G8R8A8.UNorm));
                         texture.SetData(i.NewImg.Pixels);
                         foreach (int n in i.OverwriteWith)
@@ -183,18 +207,19 @@ namespace GPUImageProcessingSDX
                     }
                     finally
                     {
+                        //manage some memory!!!!!!
                         i.OverwriteWith.Clear();
                         i.NewImg = null;
                         GC.Collect();
                     }
                 }
-
+                
+                //initial filters use a default input that just renders to the screen
                 i.RenderEffect = RenderImage;
-                i.RenderTarget = CreateRT();
-
+                i.RenderTarget = CreateRenderTarget2D();
                 
             }
-
+            //make recurssive call for the rest
             foreach (ImageFilter i in InitialFilters)
             {
                 foreach (ImageFilter j in i.Children)
@@ -202,16 +227,21 @@ namespace GPUImageProcessingSDX
                     LoadContentRec(j);
                 }
             }
-
+            //print the effect tree after its all loaded up
             PrintTree();
             base.LoadContent();
         }
 
+        /// <summary>
+        /// Recursively add all the remaining children filters
+        /// </summary>
+        /// <param name="cur"></param>
         private void LoadContentRec(ImageFilter cur)
         {
+            //first load the effect
             cur.RenderEffect = ToDisposeContent(Content.Load<Effect>(cur.Path));
-            cur.RenderTarget = CreateRT();
-
+            cur.RenderTarget = CreateRenderTarget2D();
+            //add the parameters
             foreach (Parameter p in cur.Parameters)
             {
                 if (p.Name == "ImageSize")
@@ -219,7 +249,7 @@ namespace GPUImageProcessingSDX
                     p.Value = new Vector2(GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height);
                 }
             }
-
+            //recurse
             foreach (ImageFilter i in cur.Children)
             {
                 LoadContentRec(i);
@@ -228,12 +258,12 @@ namespace GPUImageProcessingSDX
         }
 
         /// <summary>
-        /// Update doesn't do anything. Just here for completeness
+        /// Update will update all the parameters of all the filters if they need to be updated. Recursively
         /// </summary>
         /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
         {
-
+            //update all initial filters, then their children
             foreach (ImageFilter i in InitialFilters)
             {
                 i.SendParametersToGPU();
@@ -243,6 +273,10 @@ namespace GPUImageProcessingSDX
             base.Update(gameTime);
         }
 
+        /// <summary>
+        /// recursively update non-root filters
+        /// </summary>
+        /// <param name="cur"></param>
         private void UpdateRec(ImageFilter cur)
         {
             foreach (ImageFilter i in cur.Children)
@@ -252,7 +286,7 @@ namespace GPUImageProcessingSDX
         }
 
         /// <summary>
-        /// where we call the effect
+        /// Recursively call all the filters
         /// </summary>
         /// <param name="gameTime"></param>
         protected override void Draw(GameTime gameTime)
@@ -261,9 +295,10 @@ namespace GPUImageProcessingSDX
             //reset the color of the screen...not really important since we are using effects
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
+            //A value has changed, or input has changed. We need to re-render
             if (NeedsRender)
             {
-
+                //render each filter
                 foreach (ImageFilter i in InitialFilters)
                 {
 
@@ -277,8 +312,7 @@ namespace GPUImageProcessingSDX
                         DrawRec(c);
                     }
                 }
-
-                //TODO need to add the "NeedsRender" bool...cant be rendering everything every time draw is called!!
+                //the children will look at their parents to make sure they are all rendered - need to make sure they are set to rendered
                 foreach (ImageFilter i in InitialFilters)
                 {
                     ChangeNeedsRender(i);
@@ -286,16 +320,13 @@ namespace GPUImageProcessingSDX
 
                 NeedsRender = false;
             }
-
+            //draw the image to the screen. Rotate it if it is portrait
             GraphicsDevice.SetRenderTargets(GraphicsDevice.BackBuffer);
             ChangeOrientation.Parameters["InputTexture"].SetResource(TerminalFilter.RenderTarget);
             ChangeOrientation.Parameters["Orientation"].SetValue(Orientation == DisplayOrientation.Portrait ? 0 : Orientation == DisplayOrientation.LandscapeLeft ? 1 : 2);
 
             GraphicsDevice.DrawQuad(ChangeOrientation);
 
-            //System.Diagnostics.Debug.WriteLine(Utility.CalculateFrameRate().ToString());
-
-            MemoryUse("DRAW");
 
             base.Draw(gameTime);
         }
@@ -303,19 +334,19 @@ namespace GPUImageProcessingSDX
         /// <summary>
         /// recursively draw all non-initial nodes (ie. the ones with other filters as input)
         /// </summary>
-        /// <param name="cur"></param>
-        /// <param name="level"></param>
-        private void DrawRec(ImageFilter cur, int level = 1)
+        /// <param name="cur">The filter we are currently trying to render</param>
+        private void DrawRec(ImageFilter cur)
         {
             //first check to make sure that all the parent filters have been drawn
             foreach (ImageFilter j in cur.Parents)
             {
+                //if needRender is true. we need to render the parents
                 if (j.NeedRender)
                 {
                     return;
                 }
             }
-
+            //render current filter
             GraphicsDevice.SetRenderTargets(cur.RenderTarget);
             GraphicsDevice.DrawQuad(cur.RenderEffect);
             cur.NeedRender = false;
@@ -323,12 +354,17 @@ namespace GPUImageProcessingSDX
             foreach (ImageFilter i in cur.Children)
             {
                 i.SendParametersToGPU();
-                DrawRec(i, level + 1);
+                DrawRec(i);
             }
         }
 
+        /// <summary>
+        /// set the current filter and each child recursively to need render = true (ie. NEEDS to be rendered)
+        /// </summary>
+        /// <param name="cur"></param>
         private void ChangeNeedsRender(ImageFilter cur)
         {
+            //
             cur.NeedRender = true;
             foreach (ImageFilter i in cur.Children)
             {
@@ -336,9 +372,12 @@ namespace GPUImageProcessingSDX
             }
         }
 
+        /// <summary>
+        /// Recursively print the filter tree
+        /// </summary>
         public void PrintTree()
         {
-
+            //print out initial filters, then recursively call the children, indenting as we go
             foreach (ImageFilter i in InitialFilters)
             {
 
@@ -353,6 +392,11 @@ namespace GPUImageProcessingSDX
             }
         }
 
+        /// <summary>
+        /// The recursive print function
+        /// </summary>
+        /// <param name="cur">current node we are printing</param>
+        /// <param name="level">how far in we are (ie. how many dashes to print before)</param>
         private void PrintTree(ImageFilter cur, int level = 1){
 
             foreach (ImageFilter j in cur.Parents)
@@ -364,17 +408,19 @@ namespace GPUImageProcessingSDX
             }
 
             string s = "";
+            //add a psace per level - 1
             for (int i = 0; i < level-1; i++)
             {
                 s += "   ";
             }
-
+            //add one of these per line
             s += "|___";
 
             System.Diagnostics.Debug.WriteLine(s + cur.ToString());
 
             cur.NeedRender = false;
 
+            //recurse
             foreach (ImageFilter i in cur.Children)
             {
                 PrintTree(i, level + 1);
