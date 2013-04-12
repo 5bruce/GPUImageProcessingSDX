@@ -16,6 +16,7 @@ using System.IO;
 using SharpDX.Toolkit.Graphics;
 using System.Windows.Media.Imaging;
 using Microsoft.Xna.Framework.Media;
+using System.IO.IsolatedStorage;
 
 namespace GPUImageProcessingSDX
 {
@@ -43,14 +44,29 @@ namespace GPUImageProcessingSDX
 
     }
 
-    public partial class MainPage : PhoneApplicationPage
+    public partial class MainPage : PhoneApplicationPage, IDisposable
     {
+        #region GLOBALS
 
+        /// <summary>
+        /// You should be able to write a simple app without looking at this.
+        /// </summary>
         GPUImageGame Renderer;
+        /// <summary>
+        /// my filters
+        /// </summary>
         ImageFilter structureTensor, tensorSmoothing, flow, prepareForDOG, DOG, Threshold, LIC, toScreen;
-
+        /// <summary>
+        /// We need to call the dispatcher from GPUImageGame to do some cross threading
+        /// </summary>
+        /// 
         public static Dispatcher MyDispatcher;
+        /// <summary>
+        /// Allow you to take pictures and use as input
+        /// </summary>
         CameraCaptureTask ctask;
+
+        #endregion
 
         // Constructor
         public MainPage()
@@ -63,7 +79,9 @@ namespace GPUImageProcessingSDX
             AddAppBar();
 
         }
-
+        /// <summary>
+        /// initialize the (simple + boring) app bar
+        /// </summary>
         private void AddAppBar()
         {
             ApplicationBar appBar = new ApplicationBar();
@@ -78,14 +96,19 @@ namespace GPUImageProcessingSDX
             newImg.IsEnabled = true;
             appBar.MenuItems.Add(newImg);
 
+            ApplicationBarMenuItem tile = new ApplicationBarMenuItem("Use as Live Tile");
+            tile.Click += new EventHandler(tile_click);
+            tile.IsEnabled = true;
+            appBar.MenuItems.Add(tile);
+
             ApplicationBarMenuItem save = new ApplicationBarMenuItem("Save");
             save.Click += new EventHandler(save_click);
             save.IsEnabled = true;
             appBar.MenuItems.Add(save);
 
+   
+
             ApplicationBar = appBar;
-
-
 
         }
 
@@ -115,9 +138,9 @@ namespace GPUImageProcessingSDX
             LIC = new ImageFilter(@"HLSL\ToonFXLineIntegralConvolutionFilter.fxo", new Parameter("texelWidthOffset", 0.0012f),
                 new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_c", 4.97f));
             
+            //THis is the only initial filter!
             GPUImageGame.InitialFilters.Add(toScreen = new ImageFilter());
 
-           
             structureTensor.AddInput(toScreen);
             prepareForDOG.AddInput(toScreen);
 
@@ -238,6 +261,105 @@ namespace GPUImageProcessingSDX
 
             ctask.Show();
 
+        }
+
+        /// <summary>
+        /// User wants to use the current image as a live tile image
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void tile_click(object sender, EventArgs e)
+        {
+            CreateLiveTiles(true);
+        }
+
+        /// <summary>
+        /// Set the live tiles. Live tiles must be saved in isostore:Shared\ShellContent\
+        /// </summary>
+        /// <param name="saveImage">True if you would like to save the current screen. It would be false if you were calling it from main for example</param>
+        private void CreateLiveTiles(bool saveImage)
+        {
+            var myStore = IsolatedStorageFile.GetUserStoreForApplication();
+            int tileCount = 0;
+
+            //count how many tiles currently exist
+            string[] s = myStore.GetFileNames("Shared\\ShellContent\\tile*.jpg");
+            tileCount = s.Length;
+
+            if (saveImage)
+            {
+
+                int tileNum = -1;
+                //find out which number to save the new tile as (highest number available)
+                if (tileCount < 9)
+                {
+                    tileNum = tileCount + 1;
+                }
+                else
+                {//if there are already 9 tiles, remove the oldest one, and add the new one
+                    for (int i = 2; i <= 9; i++)
+                    {
+                        myStore.CopyFile("Shared\\ShellContent\\tile" + i.ToString() + ".jpg", "Shared\\ShellContent\\tile" + (i - 1).ToString() + ".jpg");
+                        tileNum = 9;
+                    }
+                }
+                //save the tile to the storage. Call the normal saveImage method with an extra tile number parameter to indicate we want to save it as a tile, NOT to saved pics
+                Renderer.SaveImage("TileImg.jpg", false, tileNum);
+                tileCount = (tileCount + 1) % 9 + 1;
+            }
+
+            //if a tile was successfully saved, update the live tiles (or create them)
+            if (tileCount > 0)
+            {
+                CycleTileData tileData = new CycleTileData()
+                {
+                    Title = "GPU-SDX",
+                    Count = null,
+                    SmallBackgroundImage =
+                              new Uri("comicfx-icon159x159.png", UriKind.RelativeOrAbsolute),
+                    CycleImages =
+
+                    new Uri[]{  
+                        new Uri("isostore:/Shared/ShellContent/tile1.jpg", UriKind.Absolute),
+                        new Uri("isostore:/Shared/ShellContent/tile2.jpg", UriKind.Absolute),
+                        new Uri("isostore:/Shared/ShellContent/tile3.jpg", UriKind.Absolute),
+                        new Uri("isostore:/Shared/ShellContent/tile4.jpg", UriKind.Absolute),
+                        new Uri("isostore:/Shared/ShellContent/tile5.jpg", UriKind.Absolute),
+                        new Uri("isostore:/Shared/ShellContent/tile6.jpg", UriKind.Absolute),
+                        new Uri("isostore:/Shared/ShellContent/tile7.jpg", UriKind.Absolute),
+                        new Uri("isostore:/Shared/ShellContent/tile8.jpg", UriKind.Absolute),
+                    }
+                };
+
+                //turn the tiles on!
+                var mainTile = ShellTile.ActiveTiles.FirstOrDefault();
+                if (null != mainTile)
+                {
+                    mainTile.Update(tileData);
+                }
+
+                MessageBox.Show("Image Added to Live Tiles.");
+
+
+            }
+        }
+
+        /// <summary>
+        /// Dipose the game
+        /// </summary>
+        public void Dispose()
+        {
+            Dispose(true);
+        }
+
+        /// <summary>
+        /// dispose everything
+        /// </summary>
+        /// <param name="all"></param>
+        public void Dispose(bool all)
+        {
+            Renderer.Dispose();
+            GC.SuppressFinalize(this);
         }
 
     }

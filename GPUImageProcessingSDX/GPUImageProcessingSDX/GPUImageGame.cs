@@ -182,7 +182,7 @@ namespace GPUImageProcessingSDX
             foreach (ImageFilter i in InitialFilters)
             {
                 
-                //if the file exists, we want to load it from content
+                //if the file exists, we want to load an image from content
                 if (File.Exists(Content.RootDirectory + "\\" + i.Path))
                 {
                     Texture2D tempTex = ToDisposeContent(Content.Load<Texture2D>(i.Path));
@@ -327,7 +327,6 @@ namespace GPUImageProcessingSDX
 
             GraphicsDevice.DrawQuad(ChangeOrientation);
 
-
             base.Draw(gameTime);
         }
 
@@ -428,7 +427,6 @@ namespace GPUImageProcessingSDX
 
         }
 
-
         /// <summary>
         /// The worst code I have ever had to write. As of right now, I don't see any better way.
         /// It is still very, very fast, even though it looks like it would be super slow.
@@ -478,18 +476,18 @@ namespace GPUImageProcessingSDX
             MediaLibrary library = new MediaLibrary();
             string imageName = saveFileName;
             var myStore = IsolatedStorageFile.GetUserStoreForApplication();
-
+            //tileIndex will be < = if we want to save to cameraroll/saved pictures
             if (tileIndex <= 0)
             {
                 Picture p = saveToCameraRoll ? library.SavePictureToCameraRoll(imageName, imgStream) : library.SavePicture(imageName, imgStream);
                 MessageBox.Show("Image Saved to 'Saved Pictures'");
             }
-
+            //remove the file from isolated storage
             string tempFile = imageName.Replace(".jpg", "_jpg.jpg");
             if (myStore.FileExists(tempFile))
                 myStore.DeleteFile(tempFile);
 
-
+            //otherewise save to live tiles
             if (tileIndex > 0 && tileIndex < 10)
             {
 
@@ -498,8 +496,6 @@ namespace GPUImageProcessingSDX
                 using (IsolatedStorageFileStream isoStream = new IsolatedStorageFileStream(fileName, FileMode.OpenOrCreate, myStore))
                 {
                     wbmp.SaveJpeg(isoStream, wbmp.PixelWidth, wbmp.PixelHeight, 0, 100);
-                    MessageBox.Show("Image Added to Live Tiles.");
-
                 }
 
 

@@ -119,19 +119,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bigWalt.dds" />
-    <Content Include="Content\Blur.fxo" />
     <Content Include="ChangeOrientation.fx" />
     <Content Include="ChangeOrientation.fxo" />
-    <None Include="Content\compile.bat" />
-    <Content Include="Content\Blur.fx" />
-    <Content Include="Content\BLUR2.fxo" />
-    <Content Include="Content\tiger.dds" />
-    <Content Include="Content\nature-hd-background.dds" />
-    <Content Include="Content\HLSL\RenderToScreen.fxo" />
     <Content Include="Content\HLSL\COMBINE.fxo" />
     <Content Include="Content\HLSL\GPUImageContrastFilter.fxo" />
     <Content Include="Content\HLSL\GPUImageMultiplyBlendFilter.fxo" />
+    <Content Include="Content\HLSL\RenderToScreen.fxo" />
     <Content Include="Content\HLSL\ToonFXAutoGammaCorrectFilter.fxo" />
     <Content Include="Content\HLSL\ToonFXCMY64AutoConstrastColorFilter.fxo" />
     <Content Include="Content\HLSL\ToonFXCMY64ColorFilter.fxo" />
