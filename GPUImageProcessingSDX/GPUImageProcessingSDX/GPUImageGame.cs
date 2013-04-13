@@ -48,7 +48,7 @@ namespace GPUImageProcessingSDX
         /// <summary>
         /// A list that will hold all of the initial filters. These are filters which have textures/images as input instead of other filters
         /// </summary>
-        public static List<ImageFilter> InitialFilters;
+        public static List<InitialFilter> InitialFilters;
         /// <summary>
         /// true if the scene needs to be rendered (when a parameter changes)
         /// </summary>
@@ -67,7 +67,7 @@ namespace GPUImageProcessingSDX
         {
 
             graphicsDeviceManager = new GraphicsDeviceManager(this);
-            InitialFilters = new List<ImageFilter>();
+            InitialFilters = new List<InitialFilter>();
             Content.RootDirectory = "Content";
 
         }
@@ -132,7 +132,7 @@ namespace GPUImageProcessingSDX
         /// <param name="filter"></param>
         /// <param name="inputImage"></param>
         /// <param name="list"></param>
-        public void LoadNewImage(ImageFilter filter, WriteableBitmap inputImage, params int[] list)
+        public void LoadNewImage(InitialFilter filter, WriteableBitmap inputImage, params int[] list)
         {
             //if there we no params, clear all inputs, and we want to add the input at spot -1 (= string.Empty)
             if (list.Length == 0)
@@ -157,7 +157,6 @@ namespace GPUImageProcessingSDX
             }
 
             //we do not want to load an image from the content
-            filter.Path = string.Empty;
             filter.NewImg = inputImage;
 
             NeedsRender = true;
@@ -177,22 +176,22 @@ namespace GPUImageProcessingSDX
             fs.Close();
             ChangeOrientation = ToDisposeContent(new Effect(GraphicsDevice, bytes));
             
-            RenderImage = ToDisposeContent(Content.Load<Effect>(@"HLSL\RenderToScreen.fxo"));
+            RenderImage = ToDisposeContent(Content.Load<Effect>(@"RenderToScreen.fxo"));
 
-            foreach (ImageFilter i in InitialFilters)
+            foreach (InitialFilter i in InitialFilters)
             {
-                
-                //if the file exists, we want to load an image from content
-                if (File.Exists(Content.RootDirectory + "\\" + i.Path))
-                {
-                    Texture2D tempTex = ToDisposeContent(Content.Load<Texture2D>(i.Path));
 
-                    if (CheckImage(tempTex.Width, tempTex.Height))
-                    {
-                        i.AddInput(tempTex);
+                if (i.LoadFromContent.Count > 0)
+                {
+                    foreach(KeyValuePair<string, int> kvp in i.LoadFromContent){
+
+                        Texture2D texture = ToDisposeContent(Content.Load<Texture2D>(kvp.Key));
+                        i.AddInput(texture, kvp.Value);
                     }
                 }
-                else if (i.OverwriteWith.Count > 0)
+
+
+                if (i.OverwriteWith.Count > 0)
                 {
                     //make sure there is atleast 1 input to load
                     try
@@ -214,18 +213,15 @@ namespace GPUImageProcessingSDX
                     }
                 }
                 
-                //initial filters use a default input that just renders to the screen
-                i.RenderEffect = RenderImage;
+                //initial filters use a default input that just renders to the screen unless otherwise specified
+                i.RenderEffect = ToDisposeContent(File.Exists(Content.RootDirectory + "\\" + i.Path) ? Content.Load<Effect>(i.Path) : RenderImage);
                 i.RenderTarget = CreateRenderTarget2D();
                 
             }
             //make recurssive call for the rest
             foreach (ImageFilter i in InitialFilters)
             {
-                foreach (ImageFilter j in i.Children)
-                {
-                    LoadContentRec(j);
-                }
+                LoadContentRec(i, true);
             }
             //print the effect tree after its all loaded up
             PrintTree();
@@ -236,11 +232,15 @@ namespace GPUImageProcessingSDX
         /// Recursively add all the remaining children filters
         /// </summary>
         /// <param name="cur"></param>
-        private void LoadContentRec(ImageFilter cur)
+        private void LoadContentRec(ImageFilter cur, bool isInitial = false)
         {
             //first load the effect
-            cur.RenderEffect = ToDisposeContent(Content.Load<Effect>(cur.Path));
-            cur.RenderTarget = CreateRenderTarget2D();
+            if (!isInitial)
+            {
+                cur.RenderEffect = ToDisposeContent(Content.Load<Effect>(cur.Path));
+                cur.RenderTarget = CreateRenderTarget2D();
+            }
+
             //add the parameters
             foreach (Parameter p in cur.Parameters)
             {

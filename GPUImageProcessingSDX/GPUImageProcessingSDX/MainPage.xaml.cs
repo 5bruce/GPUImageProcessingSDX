@@ -17,6 +17,7 @@ using SharpDX.Toolkit.Graphics;
 using System.Windows.Media.Imaging;
 using Microsoft.Xna.Framework.Media;
 using System.IO.IsolatedStorage;
+using SharpDX;
 
 namespace GPUImageProcessingSDX
 {
@@ -44,7 +45,7 @@ namespace GPUImageProcessingSDX
 
     }
 
-    public partial class MainPage : PhoneApplicationPage, IDisposable
+    public partial class MainPage : PhoneApplicationPage
     {
         #region GLOBALS
 
@@ -55,7 +56,9 @@ namespace GPUImageProcessingSDX
         /// <summary>
         /// my filters
         /// </summary>
-        ImageFilter structureTensor, tensorSmoothing, flow, prepareForDOG, DOG, Threshold, LIC, toScreen;
+        InitialFilter FirstFilter;
+        private ImageFilter SecondFilter;
+
         /// <summary>
         /// We need to call the dispatcher from GPUImageGame to do some cross threading
         /// </summary>
@@ -119,43 +122,13 @@ namespace GPUImageProcessingSDX
         {
 
             Renderer = new GPUImageGame();
-            
-            structureTensor = new ImageFilter(@"HLSL\ToonFXStructureTensorUsingSobelFilter.fxo", new Parameter("ImageSize", null));
+            FirstFilter = new InitialFilter(@"FirstFilter.fxo");
+            FirstFilter.AddInput("cat.dds");
 
-            tensorSmoothing = new ImageFilter(@"HLSL\ToonFXGaussianFilter.fxo", new Parameter("texelWidthOffset", 0.0012f),
-                new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_flow", 2.66f));
+	        SecondFilter = new ImageFilter(@"SecondFilter.fxo");
+	        SecondFilter.AddInput(FirstFilter);
 
-            flow = new ImageFilter(@"HLSL\ToonFXFlowFromStructureTensor.fxo");
-
-            prepareForDOG = new ImageFilter(@"HLSL\ToonFXPrepareForDogFilter.fxo");
-
-            DOG = new ImageFilter(@"HLSL\ToonFXFlowDogFilter.fxo", new Parameter("texelWidthOffset", 0.0012f),
-                new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_dog", 0.9f + 0.9f * 1.0f));
-
-            Threshold = new ImageFilter(@"HLSL\ToonFXThresholdDogFilter.fxo", new Parameter("edge_offset", 0.17f),
-                new Parameter("grey_offset", 2.5f), new Parameter("black_offset", 2.65f));
-
-            LIC = new ImageFilter(@"HLSL\ToonFXLineIntegralConvolutionFilter.fxo", new Parameter("texelWidthOffset", 0.0012f),
-                new Parameter("texelHeightOffset", 0.0012f), new Parameter("sigma_c", 4.97f));
-            
-            //THis is the only initial filter!
-            GPUImageGame.InitialFilters.Add(toScreen = new ImageFilter());
-
-            structureTensor.AddInput(toScreen);
-            prepareForDOG.AddInput(toScreen);
-
-            tensorSmoothing.AddInput(structureTensor);
-            flow.AddInput(tensorSmoothing);
-
-            DOG.AddInput(prepareForDOG, 1);
-            DOG.AddInput(flow, 2);
-
-            LIC.AddInput(DOG, 1);
-            LIC.AddInput(flow, 2);
-
-            Threshold.AddInput(LIC);
-            
-            Renderer.TerminalFilter = Threshold;
+	        Renderer.TerminalFilter = SecondFilter;
 
             Renderer.Run(DisplayGrid);
 
@@ -180,7 +153,7 @@ namespace GPUImageProcessingSDX
                 //launched from apps...
                 MediaLibrary library = new MediaLibrary();
                 Picture picture = library.GetPictureFromToken(queryStrings["token"]);
-                Renderer.LoadNewImage(toScreen, PictureDecoder.DecodeJpeg(picture.GetImage()));
+              //  Renderer.LoadNewImage(toScreen, PictureDecoder.DecodeJpeg(picture.GetImage()));
 
             }
             else if (queryStrings.ContainsKey("FileId"))
@@ -188,7 +161,7 @@ namespace GPUImageProcessingSDX
                 //launched from Edit
                 MediaLibrary library = new MediaLibrary();
                 Picture picture = library.GetPictureFromToken(queryStrings["FileId"]);
-                Renderer.LoadNewImage(toScreen, PictureDecoder.DecodeJpeg(picture.GetImage()));
+           //     Renderer.LoadNewImage(toScreen, PictureDecoder.DecodeJpeg(picture.GetImage()));
 
             }
             else
@@ -229,8 +202,10 @@ namespace GPUImageProcessingSDX
                 if (ev.TaskResult == TaskResult.OK)
                 {
                     //load to initial filter
-                    Renderer.LoadNewImage(toScreen, PictureDecoder.DecodeJpeg(ev.ChosenPhoto));
-
+                    if (GPUImageGame.InitialFilters.Count == 1)
+                    {
+                        Renderer.LoadNewImage(GPUImageGame.InitialFilters[0], PictureDecoder.DecodeJpeg(ev.ChosenPhoto));
+                    }
                 }
             };
 
@@ -254,7 +229,10 @@ namespace GPUImageProcessingSDX
                 if (ev.TaskResult == TaskResult.OK)
                 {
                     //load to initial filter
-                    Renderer.LoadNewImage(toScreen, PictureDecoder.DecodeJpeg(ev.ChosenPhoto));
+                    if (GPUImageGame.InitialFilters.Count == 1)
+                    {
+                        Renderer.LoadNewImage(GPUImageGame.InitialFilters[0], PictureDecoder.DecodeJpeg(ev.ChosenPhoto));
+                    }
 
                 }
             };
@@ -342,24 +320,6 @@ namespace GPUImageProcessingSDX
 
 
             }
-        }
-
-        /// <summary>
-        /// Dipose the game
-        /// </summary>
-        public void Dispose()
-        {
-            Dispose(true);
-        }
-
-        /// <summary>
-        /// dispose everything
-        /// </summary>
-        /// <param name="all"></param>
-        public void Dispose(bool all)
-        {
-            Renderer.Dispose();
-            GC.SuppressFinalize(this);
         }
 
     }

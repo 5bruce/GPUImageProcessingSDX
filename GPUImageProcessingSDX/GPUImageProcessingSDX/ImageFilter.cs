@@ -47,15 +47,7 @@ namespace GPUImageProcessingSDX
         /// Set the path if you would like to load the file from content (ie. not from media library)
         /// </summary>
         public string Path = string.Empty;
-        /// <summary>
-        /// the new image that we want to be input to this filter. ONLY FOR INITIAL FILTERS
-        /// </summary>
-        public WriteableBitmap NewImg;
-        /// <summary>
-        /// Goes with the NewImg. This is a list of all the inputs you would like to overwrite with NewImg. 
-        /// You can leave this blank if there is only 1 input
-        /// </summary>
-        public List<int> OverwriteWith;
+
         
         /// <summary>
         /// Gets or sets the effect associated with this filter
@@ -88,8 +80,6 @@ namespace GPUImageProcessingSDX
             Children = new List<ImageFilter>();
             Parents = new List<ImageFilter>();
             Inputs = new Dictionary<object, int>();
-
-            OverwriteWith = new List<int>();
 
             if (path != "")
             {
