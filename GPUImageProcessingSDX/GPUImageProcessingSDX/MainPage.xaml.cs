@@ -18,32 +18,10 @@ using System.Windows.Media.Imaging;
 using Microsoft.Xna.Framework.Media;
 using System.IO.IsolatedStorage;
 using SharpDX;
+using System.Threading.Tasks;
 
 namespace GPUImageProcessingSDX
 {
-
-    class Utility
-    {
-        #region Basic Frame Counter
-
-        private static int lastTick;
-        private static int lastFrameRate;
-        private static int frameRate;
-
-        public static int CalculateFrameRate()
-        {
-            if (System.Environment.TickCount - lastTick >= 1000)
-            {
-                lastFrameRate = frameRate;
-                frameRate = 0;
-                lastTick = System.Environment.TickCount;
-            }
-            frameRate++;
-            return lastFrameRate;
-        }
-        #endregion
-
-    }
 
     public partial class MainPage : PhoneApplicationPage
     {
@@ -122,15 +100,35 @@ namespace GPUImageProcessingSDX
         {
 
             Renderer = new GPUImageGame();
-            FirstFilter = new InitialFilter(@"FirstFilter.fxo");
+            FirstFilter = new InitialFilter(@"HLSL\RenderToScreen.fxo");
             FirstFilter.AddInput("cat.dds");
 
-	        SecondFilter = new ImageFilter(@"SecondFilter.fxo");
+	        SecondFilter = new ImageFilter(@"HLSL\SpotLight.fxo", 
+                new Parameter("ImageSize", new Vector2(1,1)),
+                new Parameter("LightPos", new Vector2(400,400)));
 	        SecondFilter.AddInput(FirstFilter);
 
 	        Renderer.TerminalFilter = SecondFilter;
 
             Renderer.Run(DisplayGrid);
+            Task t = Task.Factory.StartNew(new Action(() =>
+            {
+            Vector2 pos = new Vector2(0,0);
+                int add = 1;
+                while (true)
+                {
+                    pos.X = (pos.X + 1 * add);
+                    if (pos.X == 800 || pos.X == 0)
+                    {
+                        pos.Y = (pos.Y + 40) % 1200;
+                        add *= -1;
+                    }
+
+                    SecondFilter.UpdateParameter("LightPos", pos);
+
+                    Thread.Sleep(1);
+                }
+            }));
 
         }
 

@@ -17,8 +17,30 @@ using System.Windows.Media.Imaging;
 
 namespace GPUImageProcessingSDX
 {
-    class GPUImageGame : Game
+    /// <summary>
+    /// This class just contains a couple of helper methods for diagnostics
+    /// </summary>
+    class Utility
     {
+        #region Basic Frame Counter
+
+        private static int lastTick;
+        private static int lastFrameRate;
+        private static int frameRate;
+
+        public static int CalculateFrameRate()
+        {
+            if (System.Environment.TickCount - lastTick >= 1000)
+            {
+                lastFrameRate = frameRate;
+                frameRate = 0;
+                lastTick = System.Environment.TickCount;
+            }
+            frameRate++;
+            return lastFrameRate;
+        }
+        #endregion
+
         /// <summary>
         /// Print out your memory usage
         /// </summary>
@@ -31,24 +53,34 @@ namespace GPUImageProcessingSDX
             System.Diagnostics.Debug.WriteLine(after);
         }
 
+    }
+
+    class GPUImageGame : Game
+    {
+
         #region GLOBALS
         GraphicsDeviceManager graphicsDeviceManager;
+
         /// <summary>
         /// basic effect to render an image to the screen
         /// </summary>
         Effect RenderImage;
+
         /// <summary>
         /// will change if an image is portrait vs landscape
         /// </summary>
         Effect ChangeOrientation;
+
         /// <summary>
         /// the final filter in the chain (you want this guys output)
         /// </summary>
         public ImageFilter TerminalFilter;
+
         /// <summary>
         /// A list that will hold all of the initial filters. These are filters which have textures/images as input instead of other filters
         /// </summary>
         public static List<InitialFilter> InitialFilters;
+
         /// <summary>
         /// true if the scene needs to be rendered (when a parameter changes)
         /// </summary>
@@ -176,20 +208,17 @@ namespace GPUImageProcessingSDX
             fs.Close();
             ChangeOrientation = ToDisposeContent(new Effect(GraphicsDevice, bytes));
             
-            RenderImage = ToDisposeContent(Content.Load<Effect>(@"RenderToScreen.fxo"));
+            RenderImage = ToDisposeContent(Content.Load<Effect>(@"HLSL\RenderToScreen.fxo"));
 
             foreach (InitialFilter i in InitialFilters)
             {
-
                 if (i.LoadFromContent.Count > 0)
                 {
                     foreach(KeyValuePair<string, int> kvp in i.LoadFromContent){
-
                         Texture2D texture = ToDisposeContent(Content.Load<Texture2D>(kvp.Key));
                         i.AddInput(texture, kvp.Value);
                     }
                 }
-
 
                 if (i.OverwriteWith.Count > 0)
                 {

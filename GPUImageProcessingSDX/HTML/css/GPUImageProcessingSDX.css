@@ -1,0 +1,91 @@
+
+
+#sidebar{
+	background-color:#EEEEEE;
+}
+
+#content{
+	background-color: #EEEEEE;
+}
+
+#header {
+	background-color: #FFA500;
+	height: 250px;
+	background: #FFB200;
+	background: -moz-linear-gradient(top, #FFB200 0%, #FF3F00 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#FFB200), color-stop(100%,#FF3F00));
+	background: -webkit-linear-gradient(top, #FFB200 0%,#FF3F00 100%);
+	background: -o-linear-gradient(top, #FFB200 0%,#FF3F00 100%);
+	background: -ms-linear-gradient(top, #FFB200 0%,#FF3F00 100%);
+	background: linear-gradient(to bottom, #FFB200 0%,#FF3F00 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffb200', endColorstr='#ff3f00',GradientType=0 );
+}
+
+.headerTitle{
+
+	width:99%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 30px;
+	text-align: center;
+
+	color: #FFF;
+	text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+
+}
+
+.headerMain{
+	font-size: 42pt;
+	line-height: 42pt;
+}
+
+.headerSub{
+	margin-top: 10px;
+	font-size: 36pt;
+	line-height: 36pt;
+}
+
+.headerAbstract{
+	margin-top: 60px;
+	font-size: 16pt;
+	line-height: 16pt;
+
+	font-style: italic;;
+}
+
+.row{
+	margin-top: 20px;
+}
+
+.subcontent{
+	margin-left: 20px;
+	margin-right: 20px;
+}
+
+h1{ 
+	font-size:24pt;
+	margin-top:6px;
+	margin-bottom: 6px;
+	font-weight: normal;
+
+	color: orange;
+
+	text-transform: uppercase;
+
+}
+
+
+
+.accordion-heading a:hover{
+	text-decoration: none;
+}
+
+ul{
+	list-style-type: square;
+}
+
+h2{
+	color: #888888;
+	font-size: 20pt;
+}
+
