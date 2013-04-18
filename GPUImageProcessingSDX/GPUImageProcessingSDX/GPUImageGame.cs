@@ -14,6 +14,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace GPUImageProcessingSDX
 {
@@ -90,17 +91,24 @@ namespace GPUImageProcessingSDX
         /// When a new image is loaded, orientation is set to be the orientation of that image
         /// </summary>
         public DisplayOrientation Orientation = DisplayOrientation.Portrait;
+
+        /// <summary>
+        /// The dispatcher for the MainPage. Used to interact with UI from this SharpDX.Game
+        /// </summary>
+        public Dispatcher MainPageDispatcher;
         #endregion
 
         /// <summary>
         /// Basic constructor - initializes everything
         /// </summary>
-        public GPUImageGame()
+        public GPUImageGame(Dispatcher d)
         {
 
             graphicsDeviceManager = new GraphicsDeviceManager(this);
             InitialFilters = new List<InitialFilter>();
             Content.RootDirectory = "Content";
+
+            MainPageDispatcher = d;
 
         }
 
@@ -142,7 +150,7 @@ namespace GPUImageProcessingSDX
             else if ((ratio < 1.2f && ratio >= 1.0f) || (1.0f / ratio < 1.2f && 1.0f / ratio >= 1.0f))
             {
                 //the image was square(ish). Ask the user if they want to use this (it will squish and skew)
-                MainPage.MyDispatcher.BeginInvoke(new Action(() =>
+                MainPageDispatcher.BeginInvoke(new Action(() =>
                 {
                     MessageBoxResult res = MessageBox.Show("This picture had a bad ratio. Are you sure you want to use it?", "Bad Ratio", MessageBoxButton.OKCancel);
 
@@ -166,10 +174,11 @@ namespace GPUImageProcessingSDX
         /// <param name="list"></param>
         public void LoadNewImage(InitialFilter filter, WriteableBitmap inputImage, params int[] list)
         {
+
             //if there we no params, clear all inputs, and we want to add the input at spot -1 (= string.Empty)
             if (list.Length == 0)
             {
-                filter.Inputs.Clear();
+                filter.RemoveInput(-1);
                 filter.OverwriteWith.Add(-1);//add a -1 to the list
             }
             else
@@ -179,9 +188,9 @@ namespace GPUImageProcessingSDX
                 {
                     foreach (int n in list)
                     {
+                        filter.RemoveInput(n);
                         if (filter.Inputs.ElementAt(i).Value == n)
                         {
-                            filter.Inputs.Remove(filter.Inputs.ElementAt(i));
                             filter.OverwriteWith.Add(n);
                         }
                     }
@@ -217,6 +226,7 @@ namespace GPUImageProcessingSDX
                     foreach(KeyValuePair<string, int> kvp in i.LoadFromContent){
                         Texture2D texture = ToDisposeContent(Content.Load<Texture2D>(kvp.Key));
                         i.AddInput(texture, kvp.Value);
+
                     }
                 }
 
@@ -320,7 +330,6 @@ namespace GPUImageProcessingSDX
         /// <param name="gameTime"></param>
         protected override void Draw(GameTime gameTime)
         {
-
             //reset the color of the screen...not really important since we are using effects
             GraphicsDevice.Clear(Color.CornflowerBlue);
 

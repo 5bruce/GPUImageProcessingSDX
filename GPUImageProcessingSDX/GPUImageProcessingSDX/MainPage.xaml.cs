@@ -19,6 +19,7 @@ using Microsoft.Xna.Framework.Media;
 using System.IO.IsolatedStorage;
 using SharpDX;
 using System.Threading.Tasks;
+using System.Diagnostics;
 
 namespace GPUImageProcessingSDX
 {
@@ -35,17 +36,14 @@ namespace GPUImageProcessingSDX
         /// my filters
         /// </summary>
         InitialFilter FirstFilter;
-        private ImageFilter SecondFilter;
+        private ImageFilter Ripple;
 
-        /// <summary>
-        /// We need to call the dispatcher from GPUImageGame to do some cross threading
-        /// </summary>
-        /// 
-        public static Dispatcher MyDispatcher;
         /// <summary>
         /// Allow you to take pictures and use as input
         /// </summary>
         CameraCaptureTask ctask;
+
+        Stopwatch clock = new Stopwatch();
 
         #endregion
 
@@ -54,8 +52,6 @@ namespace GPUImageProcessingSDX
         {
             InitializeComponent();
             AddEffects();
-            MyDispatcher = this.Dispatcher;
-
 
             AddAppBar();
 
@@ -93,42 +89,31 @@ namespace GPUImageProcessingSDX
 
         }
 
+        InitialFilter temp;
+        ImageFilter second;
+
         /// <summary>
         /// Add all the hlsl files here
         /// </summary>
         public void AddEffects()
         {
 
-            Renderer = new GPUImageGame();
+            //ADD CHANGE INPUT FUNCTION TO CHANGE INPUTTEXTURE[0-9]*
+
+            Renderer = new GPUImageGame(this.Dispatcher);
             FirstFilter = new InitialFilter(@"HLSL\RenderToScreen.fxo");
             FirstFilter.AddInput("cat.dds");
 
-	        SecondFilter = new ImageFilter(@"HLSL\SpotLight.fxo", 
-                new Parameter("ImageSize", new Vector2(1,1)),
-                new Parameter("LightPos", new Vector2(400,400)));
-	        SecondFilter.AddInput(FirstFilter);
+            temp = new InitialFilter(@"HLSL\RenderToScreen.fxo");
+            temp.AddInput("cat.dds");
 
-	        Renderer.TerminalFilter = SecondFilter;
+            second = new ImageFilter(@"HLSL\SpotLight.fxo", new Parameter("ImageSize", new Vector2(0,0)), new Parameter("LightPos", new Vector2(400,400)));
+            second.AddInput(FirstFilter);
+
+
+            Renderer.TerminalFilter = second;
 
             Renderer.Run(DisplayGrid);
-            Task t = Task.Factory.StartNew(new Action(() =>
-            {
-            Vector2 pos = new Vector2(0,0);
-                int add = 1;
-                while (true)
-                {
-                    pos.X = (pos.X + 1 * add);
-                    if (pos.X == 800 || pos.X == 0)
-                    {
-                        pos.Y = (pos.Y + 40) % 1200;
-                        add *= -1;
-                    }
-
-                    SecondFilter.UpdateParameter("LightPos", pos);
-
-                    Thread.Sleep(1);
-                }
-            }));
 
         }
 
@@ -199,11 +184,9 @@ namespace GPUImageProcessingSDX
             {
                 if (ev.TaskResult == TaskResult.OK)
                 {
-                    //load to initial filter
-                    if (GPUImageGame.InitialFilters.Count == 1)
-                    {
-                        Renderer.LoadNewImage(GPUImageGame.InitialFilters[0], PictureDecoder.DecodeJpeg(ev.ChosenPhoto));
-                    }
+                    
+                    Renderer.LoadNewImage(FirstFilter, PictureDecoder.DecodeJpeg(ev.ChosenPhoto));
+                   
                 }
             };
 
@@ -319,6 +302,13 @@ namespace GPUImageProcessingSDX
 
             }
         }
+
+        private void red_Click_1(object sender, RoutedEventArgs e)
+        {
+            second.AddInput(temp);
+        }
+
+
 
     }
 }

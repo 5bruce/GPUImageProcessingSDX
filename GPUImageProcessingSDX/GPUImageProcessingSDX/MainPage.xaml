@@ -11,8 +11,11 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="Portrait" Orientation="Portrait"
-    shell:SystemTray.IsVisible="False">
+    shell:SystemTray.IsVisible="False"
+    x:Name="root">
 
-    <DrawingSurfaceBackgroundGrid x:Name="DisplayGrid" />
+    <DrawingSurfaceBackgroundGrid x:Name="DisplayGrid" >
+        <Button x:Name="red" VerticalAlignment="Bottom" HorizontalAlignment="Center" Content="Click" Click="red_Click_1" />
+    </DrawingSurfaceBackgroundGrid>
 
 </phone:PhoneApplicationPage>

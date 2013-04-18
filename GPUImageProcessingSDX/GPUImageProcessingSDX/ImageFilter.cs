@@ -67,6 +67,8 @@ namespace GPUImageProcessingSDX
             set { m_RenderTarget = value; }
         }
 
+        private bool InputAdded = false;
+
         #endregion
 
         /// <summary>
@@ -93,7 +95,49 @@ namespace GPUImageProcessingSDX
                 Parameters.Add(par);
             }
         }
-        
+
+        /// <summary>
+        /// Removes the input num from the input list. Intended to be used by AddInput()
+        /// </summary>
+        /// <param name="num">input to remove</param>
+        public void RemoveInput(int num)
+        {
+
+            //loop through each input, and if one has the same number as the one passed in, remove it!
+            if(Inputs.ContainsValue(num))
+                for (int i = 0; i < Inputs.Keys.Count; i++)
+                {
+                    if (Inputs.ElementAt(i).Value == num)
+                    {
+                        Inputs.Remove(Inputs.ElementAt(i).Key);
+                    }
+                }
+
+            if (this is InitialFilter)
+            {
+                InitialFilter temp = this as InitialFilter;
+                if (temp.LoadFromContent.ContainsValue(num))
+                {
+
+                    for (int k = 0; k < temp.LoadFromContent.Count; k++)
+                    {
+                        if (temp.LoadFromContent[temp.LoadFromContent.ElementAt(k).Key] == num)
+                        {
+                            temp.LoadFromContent.Remove(temp.LoadFromContent.ElementAt(k).Key);
+                        }
+                    }
+                }
+
+                if (temp.OverwriteWith.Contains(num))
+                {
+                    temp.OverwriteWith.Remove(num);
+                }
+
+            }
+
+
+        }
+
         /// <summary>
         /// Specifies that you would like the input of the filter to be another filter
         /// </summary>
@@ -104,6 +148,9 @@ namespace GPUImageProcessingSDX
             //make sure the parent/child relation holds
             Parents.Add(imfil);
             imfil.Children.Add(this);
+            if(InputAdded)
+                RemoveInput(num);
+            InputAdded = true;
             Inputs.Add(imfil, num);
         }
 
@@ -114,6 +161,9 @@ namespace GPUImageProcessingSDX
         /// <param name="num">If there is one input to the fitler, leave blank and name the input "InputTexture" in the HLSL. If there is multiple inputs, name them "InputTexture[0-9]*", and put that number here</param>
         public void AddInput(RenderTarget2D rt, int num = -1)
         {
+            if (InputAdded)
+                RemoveInput(num);
+            InputAdded = true;
             Inputs.Add(rt, num);
         }
 
@@ -124,6 +174,9 @@ namespace GPUImageProcessingSDX
         /// <param name="num">If there is one input to the fitler, leave blank and name the input "InputTexture" in the HLSL. If there is multiple inputs, name them "InputTexture[0-9]*", and put that number here</param>
         public void AddInput(Texture2D tex, int num = -1)
         {
+            if (InputAdded)
+                RemoveInput(num);
+            InputAdded = true;
             Inputs.Add(tex, num);
         }
 
@@ -169,11 +222,21 @@ namespace GPUImageProcessingSDX
  
                         try
                         {
+
+                            if (type != EffectParameterType.Float && p.ColumnCount > 1)
+                            {
+                                throw new Exception("You can only use float2 and float3. No other vector types are supported.");
+                            }
+
                             //need to switch to find out the type of the parameter - we need to cast before we send to the GPU! Then send
                             switch (type)
                             {
                                 case EffectParameterType.Float:
-                                    if (p.ColumnCount == 2)
+                                    if (p.ColumnCount == 3)
+                                    {
+                                        RenderEffect.Parameters[param.Name].SetValue((Vector3)param.Value);
+                                    }
+                                    else if (p.ColumnCount == 2)
                                     {
 
                                         RenderEffect.Parameters[param.Name].SetValue((Vector2)param.Value);
