@@ -82,3 +82,4 @@ C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUIm
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\.in.dll
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\.in.pdb
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\obj\ARM\Debug\XapCacheFile.xml
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX\GPUImageProcessingSDX\Bin\ARM\Debug\Properties\WMAppManifest.xml

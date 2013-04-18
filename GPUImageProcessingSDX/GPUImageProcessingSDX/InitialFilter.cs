@@ -22,6 +22,8 @@ namespace GPUImageProcessingSDX
 
         public Dictionary<string, int> LoadFromContent;
 
+        public string name = string.Empty;
+
 
         /// <summary>
         /// Constructor sets up the filter

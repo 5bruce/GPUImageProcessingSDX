@@ -48,7 +48,7 @@ namespace GPUImageProcessingSDX
         /// </summary>
         public string Path = string.Empty;
 
-        
+
         /// <summary>
         /// Gets or sets the effect associated with this filter
         /// </summary>
@@ -66,8 +66,6 @@ namespace GPUImageProcessingSDX
             get { return m_RenderTarget; }
             set { m_RenderTarget = value; }
         }
-
-        private bool InputAdded = false;
 
         #endregion
 
@@ -96,15 +94,11 @@ namespace GPUImageProcessingSDX
             }
         }
 
-        /// <summary>
-        /// Removes the input num from the input list. Intended to be used by AddInput()
-        /// </summary>
-        /// <param name="num">input to remove</param>
         public void RemoveInput(int num)
         {
 
             //loop through each input, and if one has the same number as the one passed in, remove it!
-            if(Inputs.ContainsValue(num))
+            if (Inputs.ContainsValue(num))
                 for (int i = 0; i < Inputs.Keys.Count; i++)
                 {
                     if (Inputs.ElementAt(i).Value == num)
@@ -112,7 +106,7 @@ namespace GPUImageProcessingSDX
                         Inputs.Remove(Inputs.ElementAt(i).Key);
                     }
                 }
-
+            /*
             if (this is InitialFilter)
             {
                 InitialFilter temp = this as InitialFilter;
@@ -133,10 +127,9 @@ namespace GPUImageProcessingSDX
                     temp.OverwriteWith.Remove(num);
                 }
 
-            }
-
-
+            }*/
         }
+
 
         /// <summary>
         /// Specifies that you would like the input of the filter to be another filter
@@ -146,11 +139,11 @@ namespace GPUImageProcessingSDX
         public void AddInput(ImageFilter imfil, int num = -1)
         {
             //make sure the parent/child relation holds
-            Parents.Add(imfil);
-            imfil.Children.Add(this);
-            if(InputAdded)
-                RemoveInput(num);
-            InputAdded = true;
+            if(!Parents.Contains(imfil))
+                Parents.Add(imfil);
+            if(!imfil.Children.Contains(this))
+                imfil.Children.Add(this);
+            RemoveInput(num);
             Inputs.Add(imfil, num);
         }
 
@@ -161,9 +154,7 @@ namespace GPUImageProcessingSDX
         /// <param name="num">If there is one input to the fitler, leave blank and name the input "InputTexture" in the HLSL. If there is multiple inputs, name them "InputTexture[0-9]*", and put that number here</param>
         public void AddInput(RenderTarget2D rt, int num = -1)
         {
-            if (InputAdded)
-                RemoveInput(num);
-            InputAdded = true;
+            RemoveInput(num);
             Inputs.Add(rt, num);
         }
 
@@ -174,9 +165,7 @@ namespace GPUImageProcessingSDX
         /// <param name="num">If there is one input to the fitler, leave blank and name the input "InputTexture" in the HLSL. If there is multiple inputs, name them "InputTexture[0-9]*", and put that number here</param>
         public void AddInput(Texture2D tex, int num = -1)
         {
-            if (InputAdded)
-                RemoveInput(num);
-            InputAdded = true;
+            RemoveInput(num);
             Inputs.Add(tex, num);
         }
 
@@ -191,7 +180,7 @@ namespace GPUImageProcessingSDX
             bool success = false;
 
             foreach (Parameter p in Parameters)
-            {   
+            {
                 //find the correct parameter and update it
                 if (p.Name == name)
                 {
@@ -219,24 +208,14 @@ namespace GPUImageProcessingSDX
                     {
                         EffectParameter p = RenderEffect.Parameters[param.Name];
                         EffectParameterType type = p.ParameterType;
- 
+
                         try
                         {
-
-                            if (type != EffectParameterType.Float && p.ColumnCount > 1)
-                            {
-                                throw new Exception("You can only use float2 and float3. No other vector types are supported.");
-                            }
-
                             //need to switch to find out the type of the parameter - we need to cast before we send to the GPU! Then send
                             switch (type)
                             {
                                 case EffectParameterType.Float:
-                                    if (p.ColumnCount == 3)
-                                    {
-                                        RenderEffect.Parameters[param.Name].SetValue((Vector3)param.Value);
-                                    }
-                                    else if (p.ColumnCount == 2)
+                                    if (p.ColumnCount == 2)
                                     {
 
                                         RenderEffect.Parameters[param.Name].SetValue((Vector2)param.Value);
@@ -246,7 +225,7 @@ namespace GPUImageProcessingSDX
                                         RenderEffect.Parameters[param.Name].SetValue((float)param.Value);
 
                                     }
-                                        break;
+                                    break;
                                 case EffectParameterType.Double: RenderEffect.Parameters[param.Name].SetValue((double)param.Value); break;
                                 case EffectParameterType.Int: RenderEffect.Parameters[param.Name].SetValue((int)param.Value); break;
                                 case EffectParameterType.Bool: RenderEffect.Parameters[param.Name].SetValue((bool)param.Value); break;

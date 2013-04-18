@@ -98,22 +98,39 @@ namespace GPUImageProcessingSDX
         public void AddEffects()
         {
 
-            //ADD CHANGE INPUT FUNCTION TO CHANGE INPUTTEXTURE[0-9]*
-
             Renderer = new GPUImageGame(this.Dispatcher);
             FirstFilter = new InitialFilter(@"HLSL\RenderToScreen.fxo");
             FirstFilter.AddInput("cat.dds");
 
-            temp = new InitialFilter(@"HLSL\RenderToScreen.fxo");
-            temp.AddInput("cat.dds");
+            temp = new InitialFilter(@"HLSL\FirstFilter.fxo");
 
-            second = new ImageFilter(@"HLSL\SpotLight.fxo", new Parameter("ImageSize", new Vector2(0,0)), new Parameter("LightPos", new Vector2(400,400)));
+            second = new ImageFilter(@"HLSL\SpotLight.fxo",
+                new Parameter("ImageSize", new Vector2(1, 1)),
+                new Parameter("LightPos", new Vector2(400, 400)));
             second.AddInput(FirstFilter);
-
 
             Renderer.TerminalFilter = second;
 
             Renderer.Run(DisplayGrid);
+            Task t = Task.Factory.StartNew(new Action(() =>
+            {
+                Vector2 pos = new Vector2(0, 0);
+                int add = 1;
+                while (true)
+                {
+                    pos.X = (pos.X + 1 * add);
+                    if (pos.X == 800 || pos.X == 0)
+                    {
+                        pos.Y = (pos.Y + 40) % 1200;
+                        add *= -1;
+                    }
+
+                    second.UpdateParameter("LightPos", pos);
+
+                    Thread.Sleep(1);
+                }
+            }));
+
 
         }
 
@@ -185,7 +202,7 @@ namespace GPUImageProcessingSDX
                 if (ev.TaskResult == TaskResult.OK)
                 {
                     
-                    Renderer.LoadNewImage(FirstFilter, PictureDecoder.DecodeJpeg(ev.ChosenPhoto));
+                    Renderer.LoadNewImage(GPUImageGame.InitialFilters[0], PictureDecoder.DecodeJpeg(ev.ChosenPhoto), -1);
                    
                 }
             };
@@ -305,9 +322,14 @@ namespace GPUImageProcessingSDX
 
         private void red_Click_1(object sender, RoutedEventArgs e)
         {
-            second.AddInput(temp);
+            if (!reddd)
+                second.AddInput(temp);
+            else
+                second.AddInput(FirstFilter);
+            reddd = !reddd;
         }
 
+        bool reddd = false;
 
 
     }

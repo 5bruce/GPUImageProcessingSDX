@@ -92,10 +92,8 @@ namespace GPUImageProcessingSDX
         /// </summary>
         public DisplayOrientation Orientation = DisplayOrientation.Portrait;
 
-        /// <summary>
-        /// The dispatcher for the MainPage. Used to interact with UI from this SharpDX.Game
-        /// </summary>
-        public Dispatcher MainPageDispatcher;
+        public Dispatcher MainPageDispatchter;
+
         #endregion
 
         /// <summary>
@@ -108,7 +106,7 @@ namespace GPUImageProcessingSDX
             InitialFilters = new List<InitialFilter>();
             Content.RootDirectory = "Content";
 
-            MainPageDispatcher = d;
+            MainPageDispatchter = d;
 
         }
 
@@ -119,7 +117,7 @@ namespace GPUImageProcessingSDX
         private RenderTarget2D CreateRenderTarget2D()
         {
             //the only difference here is if the RT is created portrait or landscape
-            if(Orientation == DisplayOrientation.Portrait)
+            if (Orientation == DisplayOrientation.Portrait)
                 return ToDisposeContent(RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Width, GraphicsDevice.BackBuffer.Height, PixelFormat.B8G8R8A8.UNorm));
             else
                 return ToDisposeContent(RenderTarget2D.New(GraphicsDevice, GraphicsDevice.BackBuffer.Height, GraphicsDevice.BackBuffer.Width, PixelFormat.B8G8R8A8.UNorm));
@@ -136,7 +134,7 @@ namespace GPUImageProcessingSDX
         {
             bool success = true;
             float ratio = height / width;
-            
+
             //check the ratio of the image to determine if it is portrait or landscape
             if (ratio < 2.2f && ratio > 1.2f)
             {
@@ -144,13 +142,13 @@ namespace GPUImageProcessingSDX
             }
             else if (1.0f / ratio < 2.2f && 1.0f / ratio > 1.2f)
             {
-                
+
                 Orientation = DisplayOrientation.LandscapeLeft;
             }
             else if ((ratio < 1.2f && ratio >= 1.0f) || (1.0f / ratio < 1.2f && 1.0f / ratio >= 1.0f))
             {
                 //the image was square(ish). Ask the user if they want to use this (it will squish and skew)
-                MainPageDispatcher.BeginInvoke(new Action(() =>
+                MainPageDispatchter.BeginInvoke(new Action(() =>
                 {
                     MessageBoxResult res = MessageBox.Show("This picture had a bad ratio. Are you sure you want to use it?", "Bad Ratio", MessageBoxButton.OKCancel);
 
@@ -174,11 +172,10 @@ namespace GPUImageProcessingSDX
         /// <param name="list"></param>
         public void LoadNewImage(InitialFilter filter, WriteableBitmap inputImage, params int[] list)
         {
-
             //if there we no params, clear all inputs, and we want to add the input at spot -1 (= string.Empty)
             if (list.Length == 0)
             {
-                filter.RemoveInput(-1);
+                filter.Inputs.Clear();
                 filter.OverwriteWith.Add(-1);//add a -1 to the list
             }
             else
@@ -188,9 +185,9 @@ namespace GPUImageProcessingSDX
                 {
                     foreach (int n in list)
                     {
-                        filter.RemoveInput(n);
                         if (filter.Inputs.ElementAt(i).Value == n)
                         {
+                            filter.Inputs.Remove(filter.Inputs.ElementAt(i));
                             filter.OverwriteWith.Add(n);
                         }
                     }
@@ -211,22 +208,22 @@ namespace GPUImageProcessingSDX
         {
             //Read in the changeOrientation effect, and load it up
             FileStream fs = File.OpenRead("ChangeOrientation.fxo");
-            
+
             byte[] bytes = new byte[fs.Length];
             fs.Read(bytes, 0, Convert.ToInt32(fs.Length));
             fs.Close();
             ChangeOrientation = ToDisposeContent(new Effect(GraphicsDevice, bytes));
-            
+
             RenderImage = ToDisposeContent(Content.Load<Effect>(@"HLSL\RenderToScreen.fxo"));
 
             foreach (InitialFilter i in InitialFilters)
             {
                 if (i.LoadFromContent.Count > 0)
                 {
-                    foreach(KeyValuePair<string, int> kvp in i.LoadFromContent){
+                    foreach (KeyValuePair<string, int> kvp in i.LoadFromContent)
+                    {
                         Texture2D texture = ToDisposeContent(Content.Load<Texture2D>(kvp.Key));
                         i.AddInput(texture, kvp.Value);
-
                     }
                 }
 
@@ -251,11 +248,11 @@ namespace GPUImageProcessingSDX
                         GC.Collect();
                     }
                 }
-                
+
                 //initial filters use a default input that just renders to the screen unless otherwise specified
                 i.RenderEffect = ToDisposeContent(File.Exists(Content.RootDirectory + "\\" + i.Path) ? Content.Load<Effect>(i.Path) : RenderImage);
                 i.RenderTarget = CreateRenderTarget2D();
-                
+
             }
             //make recurssive call for the rest
             foreach (ImageFilter i in InitialFilters)
@@ -330,6 +327,7 @@ namespace GPUImageProcessingSDX
         /// <param name="gameTime"></param>
         protected override void Draw(GameTime gameTime)
         {
+
             //reset the color of the screen...not really important since we are using effects
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
@@ -434,7 +432,8 @@ namespace GPUImageProcessingSDX
         /// </summary>
         /// <param name="cur">current node we are printing</param>
         /// <param name="level">how far in we are (ie. how many dashes to print before)</param>
-        private void PrintTree(ImageFilter cur, int level = 1){
+        private void PrintTree(ImageFilter cur, int level = 1)
+        {
 
             foreach (ImageFilter j in cur.Parents)
             {
@@ -446,7 +445,7 @@ namespace GPUImageProcessingSDX
 
             string s = "";
             //add a psace per level - 1
-            for (int i = 0; i < level-1; i++)
+            for (int i = 0; i < level - 1; i++)
             {
                 s += "   ";
             }

@@ -125,12 +125,11 @@
     <Content Include="Content\cat.dds" />
     <Content Include="Content\HLSL\FirstFilter.fx" />
     <Content Include="Content\HLSL\RenderToScreen.fx" />
-    <Content Include="Content\HLSL\Ripple.fx" />
     <Content Include="Content\HLSL\SpotLight.fx" />
     <Content Include="Content\HLSL\FirstFilter.fxo" />
     <Content Include="Content\HLSL\RenderToScreen.fxo" />
     <Content Include="Content\HLSL\SpotLight.fxo" />
-    <Content Include="Content\HLSL\Ripple.fxo" />
+    <Content Include="Content\cutekitty.dds" />
     <None Include="Properties\AppManifest.xml" />
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
