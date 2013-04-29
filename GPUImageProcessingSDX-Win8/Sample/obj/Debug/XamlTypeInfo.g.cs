@@ -122,16 +122,16 @@ namespace Sample.Sample_XamlTypeInfo
 
             switch (typeName)
             {
-            case "Windows.UI.Xaml.Controls.Page":
-                xamlType = new global::Sample.Sample_XamlTypeInfo.XamlSystemBaseType(typeName, typeof(global::Windows.UI.Xaml.Controls.Page));
+            case "Windows.UI.Xaml.Controls.SwapChainBackgroundPanel":
+                xamlType = new global::Sample.Sample_XamlTypeInfo.XamlSystemBaseType(typeName, typeof(global::Windows.UI.Xaml.Controls.SwapChainBackgroundPanel));
                 break;
 
-            case "Windows.UI.Xaml.Controls.UserControl":
-                xamlType = new global::Sample.Sample_XamlTypeInfo.XamlSystemBaseType(typeName, typeof(global::Windows.UI.Xaml.Controls.UserControl));
+            case "Windows.UI.Xaml.Controls.Panel":
+                xamlType = new global::Sample.Sample_XamlTypeInfo.XamlSystemBaseType(typeName, typeof(global::Windows.UI.Xaml.Controls.Panel));
                 break;
 
             case "Sample.MainPage":
-                userType = new global::Sample.Sample_XamlTypeInfo.XamlUserType(this, typeName, typeof(global::Sample.MainPage), GetXamlTypeByName("Windows.UI.Xaml.Controls.Page"));
+                userType = new global::Sample.Sample_XamlTypeInfo.XamlUserType(this, typeName, typeof(global::Sample.MainPage), GetXamlTypeByName("Windows.UI.Xaml.Controls.SwapChainBackgroundPanel"));
                 userType.Activator = Activate_0_MainPage;
                 xamlType = userType;
                 break;

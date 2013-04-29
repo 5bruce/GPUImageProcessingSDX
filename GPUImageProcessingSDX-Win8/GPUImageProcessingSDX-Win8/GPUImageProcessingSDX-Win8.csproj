@@ -108,39 +108,56 @@
   <ItemGroup>
     <Reference Include="SharpDX, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SDX2.5.0\Bin\Standard-winrt\SharpDX.dll</HintPath>
+      <HintPath>..\..\..\..\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.D3DCompiler">
+      <HintPath>..\..\..\..\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.D3DCompiler.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Direct2D1">
+      <HintPath>..\..\..\..\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Direct2D1.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Direct3D11, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SDX2.5.0\Bin\Standard-winrt\SharpDX.Direct3D11.dll</HintPath>
+      <HintPath>..\..\..\..\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Direct3D11.dll</HintPath>
     </Reference>
-    <Reference Include="SharpDX.DXGI">
-      <HintPath>..\..\..\..\SDX2.5.0\Bin\Standard-winrt\SharpDX.DXGI.dll</HintPath>
+    <Reference Include="SharpDX.DXGI, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.DXGI.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.MediaFoundation">
+      <HintPath>..\..\..\..\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.MediaFoundation.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Toolkit, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.dll</HintPath>
+      <HintPath>..\..\..\..\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Toolkit.Game, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\..\SDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.Game.dll</HintPath>
       <SpecificVersion>False</SpecificVersion>
-      <Private>True</Private>
+      <HintPath>..\..\..\..\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.Game.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Toolkit.Graphics, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.Graphics.dll</HintPath>
+      <HintPath>..\..\..\..\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.Graphics.dll</HintPath>
     </Reference>
     <Reference Include="SharpDX.Toolkit.Input, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\SDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.Input.dll</HintPath>
+      <HintPath>..\..\..\..\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.Input.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XAudio2">
+      <HintPath>..\..\..\..\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.XAudio2.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.XInput">
+      <HintPath>..\..\..\..\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.XInput.dll</HintPath>
     </Reference>
     <Reference Include="WinRTXamlToolkit">
       <HintPath>..\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="HLSL\RenderToScreen.fxo" />
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">
     <VisualStudioVersion>11.0</VisualStudioVersion>
   </PropertyGroup>

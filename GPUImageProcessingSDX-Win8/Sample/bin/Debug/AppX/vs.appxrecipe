@@ -1,8 +1,8 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Machine>PDEM</Machine>
-    <WindowsUser>Paul</WindowsUser>
+    <Machine>PAULMAC</Machine>
+    <WindowsUser>paul</WindowsUser>
     <SolutionConfiguration>Debug|AnyCPU</SolutionConfiguration>
     <PackageArchitecture>neutral</PackageArchitecture>
     <RegisteredManifestChecksum>9E8ACDE4D6375B897EDDAA5F5DFA49B83B45D7EA0EA9DCD98A3E8A354D35738F</RegisteredManifestChecksum>
@@ -13,120 +13,120 @@
     <RegisteredVersion>1.0.0.0</RegisteredVersion>
   </PropertyGroup>
   <ItemGroup>
-    <AppXManifest Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\AppxManifest.xml">
+    <AppXManifest Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2013-04-27T19:12:07.251</Modified>
+      <Modified>2013-04-29T19:22:32.367</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\Sample.exe">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\Sample.exe">
       <PackagePath>Sample.exe</PackagePath>
-      <Modified>2013-04-27T19:14:26.826</Modified>
+      <Modified>2013-04-29T19:29:38.672</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\Sample.pdb">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\Sample.pdb">
       <PackagePath>Sample.pdb</PackagePath>
-      <Modified>2013-04-27T19:14:26.811</Modified>
+      <Modified>2013-04-29T19:29:38.656</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\GPUImageProcessingSDX-Win8.dll">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\GPUImageProcessingSDX-Win8.dll">
       <PackagePath>GPUImageProcessingSDX-Win8.dll</PackagePath>
-      <Modified>2013-04-27T19:11:54.791</Modified>
+      <Modified>2013-04-29T19:29:29.232</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\SDX2.5.0\Bin\Standard-winrt\SharpDX.dll">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.dll">
       <PackagePath>SharpDX.dll</PackagePath>
       <Modified>2013-04-18T23:05:14.032</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\SDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.Game.dll">
-      <PackagePath>SharpDX.Toolkit.Game.dll</PackagePath>
-      <Modified>2013-04-18T23:05:29.125</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Toolkit.Graphics.dll">
-      <PackagePath>SharpDX.Toolkit.Graphics.dll</PackagePath>
-      <Modified>2013-04-18T23:05:23.397</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Toolkit.dll">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.dll">
       <PackagePath>SharpDX.Toolkit.dll</PackagePath>
       <Modified>2013-04-18T23:05:21.660</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Direct3D11.dll">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.Game.dll">
+      <PackagePath>SharpDX.Toolkit.Game.dll</PackagePath>
+      <Modified>2013-04-18T23:05:29.125</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Toolkit.Graphics.dll">
+      <PackagePath>SharpDX.Toolkit.Graphics.dll</PackagePath>
+      <Modified>2013-04-18T23:05:23.397</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Direct3D11.dll">
       <PackagePath>SharpDX.Direct3D11.dll</PackagePath>
       <Modified>2013-04-18T23:05:20.724</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\SDX2.5.0\Bin\Standard-winrt\SharpDX.DXGI.dll">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.DXGI.dll">
       <PackagePath>SharpDX.DXGI.dll</PackagePath>
       <Modified>2013-04-18T23:05:16.638</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Direct2D1.dll">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Direct2D1.dll">
       <PackagePath>SharpDX.Direct2D1.dll</PackagePath>
       <Modified>2013-04-18T23:05:18.934</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\GPUImageProcessingSDX-Win8.pdb">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\GPUImageProcessingSDX-Win8.pdb">
       <PackagePath>GPUImageProcessingSDX-Win8.pdb</PackagePath>
-      <Modified>2013-04-27T19:11:54.776</Modified>
+      <Modified>2013-04-29T19:29:29.217</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\SDX2.5.0\Bin\Standard-winrt\SharpDX.xml">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.xml">
       <PackagePath>SharpDX.xml</PackagePath>
       <Modified>2013-04-18T23:05:12.995</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\SDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.Game.xml">
-      <PackagePath>SharpDX.Toolkit.Game.xml</PackagePath>
-      <Modified>2013-04-18T23:05:28.439</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Toolkit.Graphics.xml">
-      <PackagePath>SharpDX.Toolkit.Graphics.xml</PackagePath>
-      <Modified>2013-04-18T23:05:22.390</Modified>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Toolkit.xml">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.xml">
       <PackagePath>SharpDX.Toolkit.xml</PackagePath>
       <Modified>2013-04-18T23:05:20.985</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Direct3D11.xml">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.Game.xml">
+      <PackagePath>SharpDX.Toolkit.Game.xml</PackagePath>
+      <Modified>2013-04-18T23:05:28.439</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Toolkit.Graphics.xml">
+      <PackagePath>SharpDX.Toolkit.Graphics.xml</PackagePath>
+      <Modified>2013-04-18T23:05:22.390</Modified>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Direct3D11.xml">
       <PackagePath>SharpDX.Direct3D11.xml</PackagePath>
       <Modified>2013-04-18T23:05:19.946</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\SDX2.5.0\Bin\Standard-winrt\SharpDX.DXGI.xml">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.DXGI.xml">
       <PackagePath>SharpDX.DXGI.xml</PackagePath>
       <Modified>2013-04-18T23:05:15.954</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Direct2D1.xml">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Direct2D1.xml">
       <PackagePath>SharpDX.Direct2D1.xml</PackagePath>
       <Modified>2013-04-18T23:05:17.962</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\Assets\Logo.png">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\Assets\Logo.png">
       <PackagePath>Assets\Logo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2012-03-16T03:42:52.000</Modified>
+      <Modified>2013-04-29T18:10:29.271</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\Assets\SmallLogo.png">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\Assets\SmallLogo.png">
       <PackagePath>Assets\SmallLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2012-03-16T03:42:52.000</Modified>
+      <Modified>2013-04-29T18:10:29.271</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\Assets\SplashScreen.png">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\Assets\SplashScreen.png">
       <PackagePath>Assets\SplashScreen.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2012-03-16T03:42:52.000</Modified>
+      <Modified>2013-04-29T18:10:29.273</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\Assets\StoreLogo.png">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\Assets\StoreLogo.png">
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2012-03-16T03:42:52.000</Modified>
+      <Modified>2013-04-29T18:10:29.297</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\App.xaml">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\App.xaml">
       <PackagePath>App.xaml</PackagePath>
-      <Modified>2013-04-27T19:01:45.362</Modified>
+      <Modified>2013-04-29T18:53:03.954</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\Common\StandardStyles.xaml">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\Common\StandardStyles.xaml">
       <PackagePath>Common\StandardStyles.xaml</PackagePath>
-      <Modified>2012-06-26T23:19:20.000</Modified>
+      <Modified>2013-04-29T18:10:29.302</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\MainPage.xaml">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\MainPage.xaml">
       <PackagePath>MainPage.xaml</PackagePath>
-      <Modified>2013-04-27T19:01:45.372</Modified>
+      <Modified>2013-04-29T18:43:07.616</Modified>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\Paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\resources.pri">
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2013-04-27T19:14:26.935</Modified>
+      <Modified>2013-04-29T19:29:38.750</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>

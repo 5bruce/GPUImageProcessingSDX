@@ -135,14 +135,21 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="GPUImageProcessingSDX-Win8">
+    <Reference Include="GPUImageProcessingSDX-Win8, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\GPUImageProcessingSDX-Win8\bin\Debug\GPUImageProcessingSDX-Win8.dll</HintPath>
     </Reference>
-    <Reference Include="SharpDX">
-      <HintPath>..\..\..\..\SDX2.5.0\Bin\Standard-winrt\SharpDX.dll</HintPath>
+    <Reference Include="SharpDX, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.dll</HintPath>
     </Reference>
-    <Reference Include="SharpDX.Toolkit.Game">
-      <HintPath>..\..\..\..\SDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.Game.dll</HintPath>
+    <Reference Include="SharpDX.Toolkit, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="SharpDX.Toolkit.Game, Version=2.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.Game.dll</HintPath>
     </Reference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '11.0' ">

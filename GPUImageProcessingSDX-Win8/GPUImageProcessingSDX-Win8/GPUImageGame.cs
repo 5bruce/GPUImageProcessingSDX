@@ -10,6 +10,9 @@ using Windows.Storage.Streams;
 using Windows.UI.Xaml.Media.Imaging;
 using System.Runtime.InteropServices.WindowsRuntime;
 using SharpDX;
+using SharpDX.Toolkit.Content;
+using System.Reflection;
+using System.IO;
 
 namespace GPUImageProcessingSDX_Win8
 {
@@ -55,7 +58,8 @@ namespace GPUImageProcessingSDX_Win8
         /// </summary>
         public GPUImageGame()
         {
-
+            
+            //this.Content.Resolvers.Add(new EmbeddedResourceResolver());
             graphicsDeviceManager = new GraphicsDeviceManager(this);
             InitialFilters = new List<InitialFilter>();
             Content.RootDirectory = "Content";
@@ -111,17 +115,35 @@ namespace GPUImageProcessingSDX_Win8
             NeedsRender = true;
         }
 
-        private async Task<Effect> LoadEffect(string path)
+        private async Task<Effect> LoadEffect(string path, bool isResource = false)
         {
 
-            var folder = Package.Current.InstalledLocation;
-            var file = await folder.GetFileAsync(path);
-            var read = await FileIO.ReadTextAsync(file);
+            byte[] bytes = new byte[0];
 
-            IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.Read);
-            byte[] bytes = new byte[stream.Size];
+            if (!isResource)
+            {
+                var folder = Package.Current.InstalledLocation;
+                var file = await folder.GetFileAsync(path);
+                var read = await FileIO.ReadTextAsync(file);
 
-            await stream.ReadAsync(bytes.AsBuffer(), (uint)bytes.Length, InputStreamOptions.None);
+                IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.Read);
+                bytes = new byte[stream.Size];
+
+                await stream.ReadAsync(bytes.AsBuffer(), (uint)bytes.Length, InputStreamOptions.None);
+            }
+            else
+            {
+                Assembly assembly = typeof(GPUImageGame).GetTypeInfo().Assembly;
+
+                using (var stream = assembly.GetManifestResourceStream("GPUImageProcessingSDX_Win8." + path))
+                {
+                    bytes = new byte[stream.Length];
+
+                    await stream.ReadAsync(bytes, 0, (int)stream.Length);
+
+                }
+
+            }
 
             return ToDisposeContent(new Effect(GraphicsDevice, bytes));
 
@@ -131,11 +153,10 @@ namespace GPUImageProcessingSDX_Win8
         /// This is called once the GraphicsDevice is all loaded up. 
         /// Load any effects, textures, etc
         /// </summary>
-        protected override void LoadContent()
+        protected async override void LoadContent()
         {
-          
 
-            RenderImage = LoadEffect(@"HLSL\RenderToScreen.fxo").Result;
+            RenderImage = await LoadEffect(@"HLSL.RenderToScreen.fxo", true);
 
             foreach (InitialFilter i in InitialFilters)
             {
@@ -247,12 +268,15 @@ namespace GPUImageProcessingSDX_Win8
 
                 NeedsRender = false;
             }
-            //draw the image to the screen. Rotate it if it is portrait
-            GraphicsDevice.SetRenderTargets(GraphicsDevice.BackBuffer);
-            ChangeOrientation.Parameters["InputTexture"].SetResource(TerminalFilter.RenderTarget);
-            ChangeOrientation.Parameters["Orientation"].SetValue(Orientation == DisplayOrientation.Portrait ? 0 : Orientation == DisplayOrientation.LandscapeLeft ? 1 : 2);
 
-            GraphicsDevice.DrawQuad(ChangeOrientation);
+            if (TerminalFilter != null)
+            {
+                //draw the image to the screen. Rotate it if it is portrait
+                GraphicsDevice.SetRenderTargets(GraphicsDevice.BackBuffer);
+                RenderImage.Parameters["InputTexture"].SetResource(TerminalFilter.RenderTarget);
+
+                GraphicsDevice.DrawQuad(RenderImage);
+            }
 
             base.Draw(gameTime);
         }
