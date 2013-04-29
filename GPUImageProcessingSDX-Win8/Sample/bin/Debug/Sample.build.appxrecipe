@@ -19,11 +19,20 @@
     <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\Sample.pdb">
       <PackagePath>Sample.pdb</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\GPUImageProcessingSDX-Win8.pdb">
+      <PackagePath>GPUImageProcessingSDX-Win8.pdb</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\GPUImageProcessingSDX-Win8.dll">
       <PackagePath>GPUImageProcessingSDX-Win8.dll</PackagePath>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Direct3D11.dll">
+      <PackagePath>SharpDX.Direct3D11.dll</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.dll">
       <PackagePath>SharpDX.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.DXGI.dll">
+      <PackagePath>SharpDX.DXGI.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.dll">
       <PackagePath>SharpDX.Toolkit.dll</PackagePath>
@@ -34,20 +43,35 @@
     <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Toolkit.Graphics.dll">
       <PackagePath>SharpDX.Toolkit.Graphics.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Direct3D11.dll">
-      <PackagePath>SharpDX.Direct3D11.dll</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.DXGI.dll">
-      <PackagePath>SharpDX.DXGI.dll</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Direct2D1.dll">
       <PackagePath>SharpDX.Direct2D1.dll</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\GPUImageProcessingSDX-Win8.pdb">
-      <PackagePath>GPUImageProcessingSDX-Win8.pdb</PackagePath>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.D3DCompiler.dll">
+      <PackagePath>SharpDX.D3DCompiler.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.MediaFoundation.dll">
+      <PackagePath>SharpDX.MediaFoundation.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.Input.dll">
+      <PackagePath>SharpDX.Toolkit.Input.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.XAudio2.dll">
+      <PackagePath>SharpDX.XAudio2.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.XInput.dll">
+      <PackagePath>SharpDX.XInput.dll</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit.dll">
+      <PackagePath>WinRTXamlToolkit.dll</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.xml">
       <PackagePath>SharpDX.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Direct3D11.xml">
+      <PackagePath>SharpDX.Direct3D11.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.DXGI.xml">
+      <PackagePath>SharpDX.DXGI.xml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.xml">
       <PackagePath>SharpDX.Toolkit.xml</PackagePath>
@@ -58,14 +82,26 @@
     <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Toolkit.Graphics.xml">
       <PackagePath>SharpDX.Toolkit.Graphics.xml</PackagePath>
     </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Direct3D11.xml">
-      <PackagePath>SharpDX.Direct3D11.xml</PackagePath>
-    </AppxPackagedFile>
-    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.DXGI.xml">
-      <PackagePath>SharpDX.DXGI.xml</PackagePath>
-    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.Direct2D1.xml">
       <PackagePath>SharpDX.Direct2D1.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.D3DCompiler.xml">
+      <PackagePath>SharpDX.D3DCompiler.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.MediaFoundation.xml">
+      <PackagePath>SharpDX.MediaFoundation.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.Toolkit.Input.xml">
+      <PackagePath>SharpDX.Toolkit.Input.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.XAudio2.xml">
+      <PackagePath>SharpDX.XAudio2.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\SharpDX2.5.0\Bin\Standard-winrt\SharpDX.XInput.xml">
+      <PackagePath>SharpDX.XInput.xml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\Content\artofflight1.png">
+      <PackagePath>Content\artofflight1.png</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\Assets\Logo.png">
       <PackagePath>Assets\Logo.png</PackagePath>
@@ -83,6 +119,18 @@
       <PackagePath>Assets\StoreLogo.png</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
     </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\Content\HLSL\RenderToScreen.fx">
+      <PackagePath>Content\HLSL\RenderToScreen.fx</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\Content\HLSL\RenderToScreen.fxo">
+      <PackagePath>Content\HLSL\RenderToScreen.fxo</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\Content\HLSL\Brighten.fxo">
+      <PackagePath>Content\HLSL\Brighten.fxo</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\Content\kitty.jpg">
+      <PackagePath>Content\kitty.jpg</PackagePath>
+    </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\App.xaml">
       <PackagePath>App.xaml</PackagePath>
     </AppxPackagedFile>
@@ -91,6 +139,63 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\MainPage.xaml">
       <PackagePath>MainPage.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\AnimatingContainer.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\AnimatingContainer.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\CascadingTextBlock.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\CascadingTextBlock.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\CountdownControl.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\CountdownControl.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\CameraCaptureControl\CameraCaptureControl.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\CameraCaptureControl\CameraCaptureControl.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\CascadingImageControl\CascadingImageControl.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\CascadingImageControl\CascadingImageControl.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\ColorPicker\ColorPicker.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\ColorPicker\ColorPicker.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\CustomAppBar\CustomAppBar.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\CustomAppBar\CustomAppBar.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\DelayedLoadControl\DelayedLoadControl.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\DelayedLoadControl\DelayedLoadControl.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\ImageButton\ImageButton.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\ImageButton\ImageButton.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\ImageToggleButton\ImageToggleButton.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\ImageToggleButton\ImageToggleButton.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\InputDialog\InputDialog.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\InputDialog\InputDialog.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\NumericUpDown\NumericUpDown.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\NumericUpDown\NumericUpDown.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\TreeView\TreeView.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\TreeView\TreeView.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\TreeView\TreeViewItem.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\TreeView\TreeViewItem.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\TreeView\TreeViewMouse.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\TreeView\TreeViewMouse.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\TreeView\TreeViewTouch.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\TreeView\TreeViewTouch.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\WatermarkTextBox\WatermarkTextBox.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\WatermarkTextBox\WatermarkTextBox.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Controls\WebBrowser\WebBrowser.xaml">
+      <PackagePath>WinRTXamlToolkit\Controls\WebBrowser\WebBrowser.xaml</PackagePath>
+    </AppxPackagedFile>
+    <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\packages\WinRTXamlToolkit.1.3.7.4\lib\netcore45\WinRTXamlToolkit\Themes\Generic.xaml">
+      <PackagePath>WinRTXamlToolkit\Themes\Generic.xaml</PackagePath>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>

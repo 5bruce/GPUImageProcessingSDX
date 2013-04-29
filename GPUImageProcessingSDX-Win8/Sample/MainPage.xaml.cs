@@ -29,7 +29,12 @@ namespace Sample
             GPUImageGame game = new GPUImageGame();
 
             InitialFilter i = new InitialFilter();
-            
+            i.AddInput("artofflight1.png");
+
+            ImageFilter t = new ImageFilter(@"HLSL\Brighten.fxo");
+            t.AddInput(i);
+
+            game.TerminalFilter = t;
 
             game.Run(this);
 

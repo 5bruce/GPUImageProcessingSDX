@@ -97,7 +97,6 @@ C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\obj\Debug\resources.resfiles
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\obj\Debug\pri.resfiles
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\obj\Debug\LanguageQualifiers.txt
-C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\obj\Debug\GPUImageProcessingSDX-Win8.pri.xml
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\obj\Debug\ProjectArchitectures.txt
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\GPUImageProcessingSDX-Win8.dll
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\bin\Debug\SharpDX.Direct2D1.dll
@@ -128,3 +127,9 @@ C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\obj\Debug\SharpDX.Direct3D11.pri.xml
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\obj\Debug\SharpDX.DXGI.pri.xml
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\obj\Debug\SharpDX.Direct2D1.pri.xml
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\obj\Debug\SharpDX.D3DCompiler.pri.xml
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\obj\Debug\SharpDX.MediaFoundation.pri.xml
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\obj\Debug\SharpDX.Toolkit.Input.pri.xml
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\obj\Debug\SharpDX.XAudio2.pri.xml
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\obj\Debug\SharpDX.XInput.pri.xml
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\obj\Debug\WinRTXamlToolkit.pri.xml

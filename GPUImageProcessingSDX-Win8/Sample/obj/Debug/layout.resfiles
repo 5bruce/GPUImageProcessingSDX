@@ -5,3 +5,8 @@ Assets\StoreLogo.png
 App.xaml
 Common\StandardStyles.xaml
 MainPage.xaml
+Content\artofflight1.png
+Content\HLSL\Brighten.fxo
+Content\HLSL\RenderToScreen.fx
+Content\HLSL\RenderToScreen.fxo
+Content\kitty.jpg

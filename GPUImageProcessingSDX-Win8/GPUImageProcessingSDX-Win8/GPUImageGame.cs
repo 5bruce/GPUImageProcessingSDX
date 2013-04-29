@@ -19,6 +19,9 @@ namespace GPUImageProcessingSDX_Win8
     public class GPUImageGame : Game
     {
 
+       
+
+
         #region GLOBALS
         GraphicsDeviceManager graphicsDeviceManager;
 
@@ -58,7 +61,7 @@ namespace GPUImageProcessingSDX_Win8
         /// </summary>
         public GPUImageGame()
         {
-            
+
             //this.Content.Resolvers.Add(new EmbeddedResourceResolver());
             graphicsDeviceManager = new GraphicsDeviceManager(this);
             InitialFilters = new List<InitialFilter>();
@@ -115,39 +118,6 @@ namespace GPUImageProcessingSDX_Win8
             NeedsRender = true;
         }
 
-        private async Task<Effect> LoadEffect(string path, bool isResource = false)
-        {
-
-            byte[] bytes = new byte[0];
-
-            if (!isResource)
-            {
-                var folder = Package.Current.InstalledLocation;
-                var file = await folder.GetFileAsync(path);
-                var read = await FileIO.ReadTextAsync(file);
-
-                IRandomAccessStream stream = await file.OpenAsync(FileAccessMode.Read);
-                bytes = new byte[stream.Size];
-
-                await stream.ReadAsync(bytes.AsBuffer(), (uint)bytes.Length, InputStreamOptions.None);
-            }
-            else
-            {
-                Assembly assembly = typeof(GPUImageGame).GetTypeInfo().Assembly;
-
-                using (var stream = assembly.GetManifestResourceStream("GPUImageProcessingSDX_Win8." + path))
-                {
-                    bytes = new byte[stream.Length];
-
-                    await stream.ReadAsync(bytes, 0, (int)stream.Length);
-
-                }
-
-            }
-
-            return ToDisposeContent(new Effect(GraphicsDevice, bytes));
-
-        }
 
         /// <summary>
         /// This is called once the GraphicsDevice is all loaded up. 
@@ -156,12 +126,23 @@ namespace GPUImageProcessingSDX_Win8
         protected async override void LoadContent()
         {
 
-            RenderImage = await LoadEffect(@"HLSL.RenderToScreen.fxo", true);
+            RenderImage = Content.Load<Effect>(@"HLSL\RenderToScreen.fxo");
 
             foreach (InitialFilter i in InitialFilters)
             {
                 //initial filters use a default input that just renders to the screen unless otherwise specified
                 i.RenderEffect = RenderImage;
+
+                if (i.LoadFromContent.Count > 0)
+                {
+                    foreach (KeyValuePair<string, int> kvp in i.LoadFromContent)
+                    {
+                        Texture2D texture = Content.Load<Texture2D>(kvp.Key);
+                        i.RenderTarget = CreateRenderTarget2D(texture.Width, texture.Height);
+                        i.AddInput(texture, kvp.Value);
+                    }
+                }
+
             }
             //make recurssive call for the rest
             foreach (ImageFilter i in InitialFilters)
@@ -186,7 +167,7 @@ namespace GPUImageProcessingSDX_Win8
             if (!isInitial)
             {
                 cur.RenderEffect = ToDisposeContent(Content.Load<Effect>(cur.Path));
-                //cur.RenderTarget = CreateRenderTarget2D();
+                cur.RenderTarget = CreateRenderTarget2D(cur.Parents[0].RenderTarget.Width, cur.Parents[0].RenderTarget.Height);
             }
 
             //add the parameters
@@ -211,6 +192,7 @@ namespace GPUImageProcessingSDX_Win8
         /// <param name="gameTime"></param>
         protected override void Update(GameTime gameTime)
         {
+            
             //update all initial filters, then their children
             foreach (ImageFilter i in InitialFilters)
             {
@@ -242,7 +224,7 @@ namespace GPUImageProcessingSDX_Win8
 
             //reset the color of the screen...not really important since we are using effects
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
+            
             //A value has changed, or input has changed. We need to re-render
             if (NeedsRender)
             {

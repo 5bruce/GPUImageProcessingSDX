@@ -154,7 +154,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="HLSL\RenderToScreen.fxo" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />

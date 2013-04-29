@@ -48,10 +48,6 @@ C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\WinRTXamlToolkit.pri
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\obj\Debug\GPUImageProcessingSDX-Win8.dll
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\obj\Debug\GPUImageProcessingSDX-Win8.pdb
-C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\obj\Debug\priconfig.xml.intermediate
-C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\obj\Debug\layout.resfiles.intermediate
-C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\obj\Debug\resources.resfiles.intermediate
-C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\obj\Debug\pri.resfiles.intermediate
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\obj\Debug\priconfig.xml
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\obj\Debug\layout.resfiles
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\obj\Debug\resources.resfiles
@@ -90,3 +86,7 @@ C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.XAudio2.pri
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.XInput.xml
 C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\bin\Debug\SharpDX.XInput.pri
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\obj\Debug\priconfig.xml.intermediate
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\obj\Debug\layout.resfiles.intermediate
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\obj\Debug\resources.resfiles.intermediate
+C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\obj\Debug\pri.resfiles.intermediate

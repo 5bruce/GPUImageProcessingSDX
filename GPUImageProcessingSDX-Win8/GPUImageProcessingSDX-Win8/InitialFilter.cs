@@ -45,10 +45,6 @@ namespace GPUImageProcessingSDX_Win8
         /// <param name="num">input texture position in HLSL shader</param>
         public void AddInput(string path, int num = -1)
         {
-            if (path.Substring(path.Length - 3).ToUpper() != "DDS")
-            {
-                throw new Exception("Images must be in dds format. You can use Gimp to convert an image to DDS");
-            }
             LoadFromContent.Add(path, num);
         }
     }
