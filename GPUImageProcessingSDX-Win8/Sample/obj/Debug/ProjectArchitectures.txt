@@ -1,2 +1,0 @@
-C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8\GPUImageProcessingSDX-Win8.csproj;neutral
-C:\Users\paul\Documents\GitHub\GPUImageProcessingSDX\GPUImageProcessingSDX-Win8\Sample\Sample.csproj;neutral
